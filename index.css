@@ -1,0 +1,16 @@
+
+html {
+    scroll-behavior: smooth;
+}
+body::-webkit-scrollbar {
+    width: 8px;
+}
+
+body::-webkit-scrollbar-track {
+    background: #171717;
+}
+
+body::-webkit-scrollbar-thumb {
+    background-image: linear-gradient(180deg, var(--orquideaLilas), var(--azulArpoador), var(--VerdeEsmeralda));
+    border-radius: 50px; 
+}

@@ -1,0 +1,54 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    font-family: 'Playfair Display', serif;
+}
+::selection {
+  background-color: var(--orquideaLilas); /* cor de fundo ao selecionar */
+  color: white;              /* cor do texto selecionado */
+}
+
+:root {
+    --accent: #B99470;
+    --rosa: #ac62ea;
+    --orquideaLilas: #8388f1;
+    --VerdeEsmeralda: #9dcd5a;
+    --azulArpoador: #4191cf;
+}
+
+
+@layer utilities {
+    .nav-ul {
+        @apply flex flex-col items-center gap-4 sm:flex-row md:gap-6 relative z-20;
+    }
+
+
+
+    .nav-li_a {
+        @apply hover:text-[#B99470] px-3 py-2 rounded-md font-medium;
+    }
+
+    .nav-sidebar {
+        @apply absolute left-0 right-0 bg-opacity-10 backdrop-blur-sm transition-all duration-300 ease-in-out overflow-hidden z-20 mx-auto sm:hidden block;
+    }
+
+    .rotate-y-hover {
+        transition: transform 0.8s ease;
+        transform-style: preserve-3d;
+    }
+
+    .rotate-y-hover:hover {
+        transform: rotateY(360deg);
+    }
+}

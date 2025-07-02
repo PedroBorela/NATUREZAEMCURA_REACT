@@ -1,0 +1,36 @@
+.learn-more:hover .circle {
+  width: 100%;
+}
+
+.learn-more:hover .icon.arrow {
+  background: #fff;
+  transform: translate(1rem, 0);
+}
+
+.learn-more:hover .button-text {
+  color: #fff;
+}
+
+.icon.arrow {
+  position: absolute;
+  left: 0.625rem;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  width: 1.125rem;
+  height: 0.125rem;
+  background: none;
+  transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+}
+
+.icon.arrow::before {
+  content: "";
+  position: absolute;
+  top: -0.29rem;
+  right: 0.0625rem;
+  width: 0.625rem;
+  height: 0.625rem;
+  border-top: 0.125rem solid #fff;
+  border-right: 0.125rem solid #fff;
+  transform: rotate(45deg);
+}
