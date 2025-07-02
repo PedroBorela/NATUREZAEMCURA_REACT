@@ -1,7 +1,7 @@
 import ScrollVelocity from "../../blocks/TextAnimations/ScrollVelocity/ScrollVelocity";
 import Bullet from "../../components/Bullet.jsx";
 import SpotlightCard from "../../components/SpotlightCard/SpotlightCard";
-import './Hero.css';
+import './hero.css';
 
 // import '../../../public/imgs/AllanBorela.svg';
 const Hero = () => {
