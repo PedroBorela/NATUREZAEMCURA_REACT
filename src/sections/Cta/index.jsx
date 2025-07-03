@@ -49,15 +49,35 @@ const CTA = () => {
                         className="rounded-lg w-full h-auto max-h-[350px] object-contain transition-transform"
                     />
                 </h1>
-                <h2 ref={headRef} className="text-2xl md:text-3xl mb-8 font-bold text-orquideaLilas-100">
-                    Centro de cuidado e cultura
-                </h2>
-                <p
-                    ref={descriptionRef}
-                    className="text-xl max-w-3xl mx-auto mb-10 font-bold text-orquideaLilas-100"
+                <h2
+                    ref={headRef}
+                    className="text-2xl md:text-3xl mb-6 font-serif italic font-bold  text-white py-2  rounded-md"
+                    style={{
+                        textShadow: '0 0 10px #8388f1, 0 0 20px #8388f1',
+                    }}
                 >
-                    Terapias integrativas, yoga e sabedoria ancestral para transformar sua vida
+                    Terapias alternativas<br></br> e complementares
+                </h2>
+
+                {/* <p
+                    ref={descriptionRef}
+                    className="text-xl max-w-3xl mx-auto mb-5 font-serif font-bold text-white px-4 py-2 rounded-md"
+                    style={{
+                        textShadow: '0 0 12px #8388f1, 0 0 24px #8388f1',
+                    }}
+                >
+                    técnicas de yoga e sabedoria ancestral para transformar sua vida
+                </p>               */}
+                  <p
+                    ref={descriptionRef}
+                    className="text-xl max-w-3xl mx-auto mb-10 font-serif font-bold tracking-wide text-white px-36 py-2"
+                    style={{
+                        textShadow: '0 0 12px #8388f1, 0 0 24px #8388f1',
+                    }}
+                >
+                    Venha participar das aulas de Yoga, dos Cursos de Reiki, Encontros Mensais,das Excursões, Cerimônias Espirituais Indígenas, Cerimônia de Cacau Medicinal e Encontros Exclusivos para Mulheres!
                 </p>
+
                 <div
                     ref={buttonsRef}
                     className="flex flex-col sm:flex-row justify-center gap-4 items-center pb-5"
@@ -65,7 +85,7 @@ const CTA = () => {
                     <StarBorder
                         as="a"
                         color="white"
-                        bgColor="bg-verdeEsmeralda-300"
+                        bgColor="bg-gradient-to-br from-green-700 via-green-500 to-green-700 to-90%"
                         thickness={3}
                         speed="1s"
                         href="https://wa.me/5533984385658?text=Olá, tenho interesse em fazer parte"

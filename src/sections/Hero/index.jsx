@@ -1,14 +1,13 @@
 import { useEffect, useRef } from "react";
 import Bullet from "../../components/Bullet.jsx";
 import SpotlightCard from "../../components/SpotlightCard/SpotlightCard";
-<<<<<<< HEAD
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import './Hero.css';
 import gsap from "gsap";
 gsap.registerPlugin(ScrollTrigger);
-=======
+
 import './hero.css';
->>>>>>> 4c6b9c903572dd045b05f8e89ece314e8a55e1cf
+
 
 const Hero = () => {
    const sectionRef = useRef(null);

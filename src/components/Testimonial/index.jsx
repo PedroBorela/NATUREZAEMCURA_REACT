@@ -7,7 +7,7 @@ import Aurora from "../../blocks/Backgrounds/Aurora/Aurora"
 
 export function InfiniteMovingCardsDemo() {
     return (
-        <div
+        <div id="depoimentos"
             className="relative h-[40rem] rounded-md flex flex-col antialiased bg-[url('./imgs/fundodesfoc.jpg')] dark:bg-grid-white/[0.05] items-center justify-center overflow-hidden px-4"
         >
             {/* Aurora como fundo */}
@@ -19,6 +19,9 @@ export function InfiniteMovingCardsDemo() {
             <h2 className="text-3xl md:text-5xl font-bold text-white mb-8 text-center drop-shadow-md z-10">
                 Frases que Inspiram
             </h2>
+             <p className="text-center text-white text-sm md:text-lg max-w-2xl mb-8 z-10">
+                Conheça relatos de quem sentiu, na pele e na alma, o cuidado, a segurança e a transformação que vivem na <strong className="text-verdeEsmeralda-200">Natureza em Cura</strong>.
+            </p>
 
             {/* Cards */}
             <div className="w-full max-w-6xl z-10">

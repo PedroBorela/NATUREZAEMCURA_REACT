@@ -18,15 +18,16 @@ const App = () => {
       {/* <TextCursor spacing={10}/> */}
       <Navbar />
       <CTA />
-      <CarouselDemo />
       <Numeros />
       <TimelineDemo />
       <BordaOndulada direcao="bottom" />
       <CardHoverEffectDemo />
       <BordaOndulada direcao="top" />
+      <CarouselDemo />
+
       <Hero />
       {/* <AnimatedTestimonialsDemo /> */}
-      <BordaOndulada direcao="bottom" cor="#567d1e" />
+      {/* <BordaOndulada direcao="bottom" cor="#567d1e" /> */}
       <InfiniteMovingCardsDemo />
       <BordaOndulada direcao="top" cor="#567d1e"/>
       <VoltarPraCima />
