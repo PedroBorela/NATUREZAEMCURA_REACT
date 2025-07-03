@@ -1,5 +1,11 @@
 .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/imgs/yogaarLivre.avif');
-            background-size: cover;
-            background-position: center;
-        }
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/imgs/yogaarLivre.avif');
+    background-size: cover;
+    background-position: center;
+}
+
+@media(min-width:640px) {
+    .hero.parallax {
+        background-attachment: fixed;
+    }
+}

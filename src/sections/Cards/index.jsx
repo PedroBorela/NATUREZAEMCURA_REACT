@@ -8,22 +8,81 @@ import {
     FaUsers
 } from "react-icons/fa";
 import "./cards.css"
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
 
 // import TextCursor from "../../blocks/TextAnimations/TextCursor/TextCursor"
 
-export function CardHoverEffectDemo() {
-    return (
+gsap.registerPlugin(ScrollTrigger);
 
-        <div id="beneficios" className="w-full min-h-screen flex items-center justify-center bg-verdeEsmeralda-100 py-12 relative">
-            <img className="selector lg:w-[850px] h-auto absolute bottom-0 right-0 hidden sm:block md:w-[550px] opacity-70" src="/imgs/florBack.png"/>
-            <img className="selector lg:w-[850px] h-auto absolute top-0 left-0 hidden sm:block md:w-[550px] opacity-70" src="/imgs/floral.png"/>
-            
+export function CardHoverEffectDemo() {
+    const containerRef = useRef(null);
+
+    useEffect(() => {
+        const ctx = gsap.context(() => {
+            gsap.from(".title", {
+                y: 50,
+                opacity: 0,
+                duration: 1,
+                ease: "power3.out",
+                scrollTrigger: {
+                    trigger: ".title",
+                    start: "top 80%",
+                },
+            });
+
+            gsap.from(".subtitle", {
+                y: 30,
+                opacity: 0,
+                duration: 1,
+                ease: "power3.out",
+                scrollTrigger: {
+                    trigger: ".subtitle",
+                    start: "top 85%",
+                },
+            });
+
+            gsap.from(".selector", {
+                opacity: 0,
+                scale: 0.95,
+                duration: 1.5,
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: ".selector",
+                    start: "top 90%",
+                },
+            });
+        }, containerRef);
+
+        return () => ctx.revert();
+    }, []);
+
+    return (
+        <div
+            id="beneficios"
+            ref={containerRef}
+            className="w-full min-h-screen flex items-center justify-center bg-verdeEsmeralda-100 py-12 relative"
+        >
+            <img
+                className="selector lg:w-[850px] h-auto absolute bottom-0 right-0 hidden sm:block md:w-[550px] opacity-70"
+                src="/imgs/florBack.png"
+            />
+            <img
+                className="selector lg:w-[850px] h-auto absolute top-0 left-0 hidden sm:block md:w-[550px] opacity-70"
+                src="/imgs/floral.png"
+            />
+
             <div className="max-w-5xl w-full px-4 sm:px-6 lg:px-8">
                 <div className="text-center mb-5">
-            {/* <TextCursor/> */}
-
-                    <h2 className="text-4xl font-bold mb-4 text-[#5F6F52]">Nossos Serviços</h2>
-                    <p className="text-xl max-w-2xl mx-auto text-green-600 ">Por que escolher os cursos de yoga da <span className="font-bold text-verdeEsmeralda-300">Natureza em Cura?</span>
+                    <h2 className="title text-4xl font-bold mb-4 text-[#5F6F52]">
+                        Nossos Serviços
+                    </h2>
+                    <p className="subtitle text-xl max-w-2xl mx-auto text-green-600">
+                        Por que escolher os cursos de yoga da{" "}
+                        <span className="font-bold text-verdeEsmeralda-300">
+                            Natureza em Cura?
+                        </span>
                     </p>
                 </div>
                 <HoverEffect items={projects} />
@@ -33,7 +92,7 @@ export function CardHoverEffectDemo() {
 }
 export const projects = [
     {
-         icon: <FaLeaf />,
+        icon: <FaLeaf />,
         title: "Yoga Integral",
         description:
             "Uma prática milenar que une posturas, respiração, meditação e valores éticos para transformar corpo, mente, emoções e espírito.",

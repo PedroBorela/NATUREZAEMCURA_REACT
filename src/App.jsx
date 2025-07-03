@@ -9,6 +9,9 @@ import { CardHoverEffectDemo } from "./sections/Cards"
 import Numeros from "./sections/Numeros"
 import { CarouselDemo } from "./components/CarouselDemo"
 import { TimelineDemo } from "./components/TimelineDemo"
+import Footer from "./sections/footer"
+import VoltarPraCima from "./components/voltarPraCima"
+import { InfiniteMovingCardsDemo } from "./components/Testimonial"
 const App = () => {
   return (
     <main className="relative min-h-screen w-screen overflow-x-hidden">
@@ -22,7 +25,12 @@ const App = () => {
       <CardHoverEffectDemo />
       <BordaOndulada direcao="top" />
       <Hero />
-      <AnimatedTestimonialsDemo />
+      {/* <AnimatedTestimonialsDemo /> */}
+      <BordaOndulada direcao="bottom" cor="#567d1e" />
+      <InfiniteMovingCardsDemo />
+      <BordaOndulada direcao="top" cor="#567d1e"/>
+      <VoltarPraCima />
+      <Footer />
     </main>
   )
 }

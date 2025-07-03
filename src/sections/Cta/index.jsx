@@ -39,7 +39,7 @@ const CTA = () => {
     }, []);
 
     return (
-        <section id="home" className="hero min-h-screen flex items-center justify-center text-white pt-20">
+        <section id="home" className="hero parallax min-h-screen flex items-center justify-center text-white pt-20">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
                 <h1 className="text-5xl md:text-7xl font-bold mb-6">
                     <img

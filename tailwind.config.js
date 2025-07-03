@@ -63,6 +63,7 @@ export default {
         'star-movement-bottom': 'star-movement-bottom 6s linear infinite alternate',
         'star-movement-top': 'star-movement-top 6s linear infinite alternate',
         shine: 'shine 5s linear infinite',
+        scroll: 'scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite',
       },
 
       keyframes: {
@@ -77,6 +78,11 @@ export default {
         shine: {
           '0%': { 'background-position': '100%' },
           '100%': { 'background-position': '-100%' },
+        },
+        scroll: {
+          to: {
+            transform: 'translate(calc(-50% - 0.5rem))',
+          },
         },
       },
     },

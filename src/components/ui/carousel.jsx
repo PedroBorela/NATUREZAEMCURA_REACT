@@ -128,19 +128,16 @@ const CarouselControl = ({
     );
 };
 
-export default function Carousel({
-    slides
-}) {
+export default function Carousel({ slides }) {
     const [current, setCurrent] = useState(0);
+    const intervalRef = useRef(null);
 
     const handlePreviousClick = () => {
-        const previous = current - 1;
-        setCurrent(previous < 0 ? slides.length - 1 : previous);
+        setCurrent((prev) => (prev - 1 + slides.length) % slides.length);
     };
 
     const handleNextClick = () => {
-        const next = current + 1;
-        setCurrent(next === slides.length ? 0 : next);
+        setCurrent((prev) => (prev + 1) % slides.length);
     };
 
     const handleSlideClick = (index) => {
@@ -148,6 +145,17 @@ export default function Carousel({
             setCurrent(index);
         }
     };
+
+    // 🟣 AutoPlay: avança automaticamente a cada 5 segundos
+    useEffect(() => {
+        intervalRef.current = setInterval(() => {
+            setCurrent((prev) => (prev + 1) % slides.length);
+        }, 5000); // 5000 ms = 5 segundos
+
+        return () => {
+            clearInterval(intervalRef.current);
+        };
+    }, [slides.length]);
 
     const id = useId();
 
@@ -166,16 +174,21 @@ export default function Carousel({
                         slide={slide}
                         index={index}
                         current={current}
-                        handleSlideClick={handleSlideClick} />
+                        handleSlideClick={handleSlideClick}
+                    />
                 ))}
             </ul>
             <div className="absolute flex justify-center w-full top-[calc(100%+1rem)]">
                 <CarouselControl
                     type="previous"
                     title="ir para o slide anterior"
-                    handleClick={handlePreviousClick} />
-
-                <CarouselControl type="next" title="ir para o próximo slide" handleClick={handleNextClick} />
+                    handleClick={handlePreviousClick}
+                />
+                <CarouselControl
+                    type="next"
+                    title="ir para o próximo slide"
+                    handleClick={handleNextClick}
+                />
             </div>
         </div>
     );

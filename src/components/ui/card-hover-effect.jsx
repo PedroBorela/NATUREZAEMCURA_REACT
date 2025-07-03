@@ -1,7 +1,10 @@
 import { cn } from "@/lib/utils";
+import gsap from "gsap";
 import { AnimatePresence, motion } from "motion/react";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
+
 
 export const HoverEffect = ({
     items,
@@ -35,7 +38,7 @@ export const HoverEffect = ({
                                 }} />
                         )}
                     </AnimatePresence>
-                    <Card>
+                    <Card className="cardzin" >
                         <div className="text-2xl text-white">{item.icon}</div>
                         <CardTitle>{item.title}</CardTitle>
                         <CardDescription>{item.description}</CardDescription>
