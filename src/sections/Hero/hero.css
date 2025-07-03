@@ -4,7 +4,9 @@
     background-size: cover;
     background-position: center;
 }
-
+#sobre{
+background-image: url('./imgs/fundodesfoc.jpg');
+}
 .girando{
     animation: girando 10s ease-out infinite;
 }
