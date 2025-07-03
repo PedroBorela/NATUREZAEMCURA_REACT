@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import Bullet from "../../components/Bullet.jsx";
 import SpotlightCard from "../../components/SpotlightCard/SpotlightCard";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import './Hero.css';
+import './hero.css';
 import gsap from "gsap";
 gsap.registerPlugin(ScrollTrigger);
 
