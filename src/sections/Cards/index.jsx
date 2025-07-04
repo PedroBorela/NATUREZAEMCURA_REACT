@@ -12,7 +12,6 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 
-// import TextCursor from "../../blocks/TextAnimations/TextCursor/TextCursor"
 
 gsap.registerPlugin(ScrollTrigger);
 

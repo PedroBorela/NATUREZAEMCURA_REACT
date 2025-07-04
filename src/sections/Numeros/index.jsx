@@ -13,7 +13,7 @@ import { SiReasonstudios } from "react-icons/si";
 
 const Numeros = () => {
     return (
-        <div className="bg-gradient-to-br from-orquideaLilas-200 via-azulArpoador-300 to-indigo-900 to-90% drop-shadow-xl  text-white py-20 mb-12">
+        <div className="bg-gradient-to-br from-orquideaLilas-200 via-azulArpoador-300 to-indigo-900 to-90% drop-shadow-xl  text-white py-20 ">
             <div className="max-w-7xl mx-auto   grid grid-cols-1 md:grid-cols-8 gap-8 text-center px-4">
 
                 {/* Item 1 */}
