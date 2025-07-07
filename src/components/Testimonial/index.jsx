@@ -8,7 +8,7 @@ import Aurora from "../../blocks/Backgrounds/Aurora/Aurora"
 export function InfiniteMovingCardsDemo() {
     return (
         <div id="depoimentos"
-            className="relative h-[40rem] rounded-md flex flex-col antialiased bg-[url('./imgs/fundodesfoc.jpg')] dark:bg-grid-white/[0.05] items-center justify-center overflow-hidden px-4"
+            className="relative h-[40rem] rounded-md flex flex-col antialiased bg-[url('/imgs/fundodesfoc.jpg')] dark:bg-grid-white/[0.05] items-center justify-center overflow-hidden px-4"
         >
             {/* Aurora como fundo */}
             <div className="absolute inset-0 z-10">
