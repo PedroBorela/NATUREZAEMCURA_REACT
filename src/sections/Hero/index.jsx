@@ -55,7 +55,10 @@ const Hero = () => {
   }, []);
 
   return (
-     <section id="sobre" ref={sectionRef} className="py-20 min-h-36 bg-[url('./imgs/fundodesfoc.jpg')] relative overflow-hidden overflow-x-hidden">
+    <section id="sobre" ref={sectionRef} className="py-20 min-h-36 bg-[url('./imgs/fundodesfoc.jpg')] relative overflow-hidden overflow-x-hidden">
+
+
+
       <div className="max-w-7xl mx-auto py-10 px-4 sm:px-6 lg:px-8">
         {/* Added title section */}
         <div className="text-center mb-16">
