@@ -42,7 +42,7 @@ const Slide = memo(({ slide, index, current, handleSlideClick }) => {
         <div className="[perspective:1200px] [transform-style:preserve-3d]">
             <li
                 ref={slideRef}
-                className="flex flex-1 flex-col items-center justify-center relative text-center text-white w-[70vmin] h-[70vmin] mx-[4vmin] z-10"
+                className="flex flex-1 flex-col items-center justify-between relative text-center text-white w-[70vmin] h-[70vmin] mx-[4vmin] z-10"
                 onClick={() => handleSlideClick(index)}
                 onMouseMove={handleMouseMove}
                 onMouseLeave={handleMouseLeave}
@@ -54,8 +54,8 @@ const Slide = memo(({ slide, index, current, handleSlideClick }) => {
                 <div
                     className="absolute top-0 left-0 w-full h-full bg-[#1D1F2F] rounded-[1%] overflow-hidden transition-all duration-150 ease-out"
                     style={{
-                        transform: current === index 
-                            ? "translate3d(calc(var(--x) / 30), calc(var(--y) / 30), 0)" 
+                        transform: current === index
+                            ? "translate3d(calc(var(--x) / 30), calc(var(--y) / 30), 0)"
                             : "none",
                     }}
                 >
@@ -72,7 +72,8 @@ const Slide = memo(({ slide, index, current, handleSlideClick }) => {
                     )}
                 </div>
 
-                <article className={`relative p-[4vmin] transition-opacity duration-1000 ${current === index ? "opacity-100" : "opacity-0"}`}>
+                {/* Conteúdo superior */}
+                <article className={`relative p-[4vmin] w-full transition-opacity duration-1000 ${current === index ? "opacity-100" : "opacity-0"}`}>
                     <h2 className="text-lg md:text-2xl lg:text-4xl font-semibold">
                         {title}
                     </h2>
@@ -80,6 +81,19 @@ const Slide = memo(({ slide, index, current, handleSlideClick }) => {
                         {button}
                     </p>
                 </article>
+
+                {/* Botão inferior */}
+                <div className={`relative p-[4vmin] w-full transition-opacity duration-1000 ${current === index ? "opacity-100" : "opacity-0"}`}>
+                    <button
+                        className="px-6 py-3 bg-green-500 hover:bg-green-600 text-white font-medium rounded-full transition-all duration-300"
+                        onClick={(e) => {
+                            e.stopPropagation(); // Impede que o clique no botão ative o handleSlideClick
+                            // Adicione aqui a ação do botão
+                        }}
+                    >
+                        Saiba mais
+                    </button>
+                </div>
             </li>
         </div>
     );
@@ -89,9 +103,8 @@ Slide.displayName = "Slide";
 
 const CarouselControl = memo(({ type, title, handleClick }) => (
     <button
-        className={`w-10 h-10 flex items-center justify-center mx-2 bg-neutral-200 dark:bg-neutral-800 rounded-full transition-transform hover:-translate-y-0.5 active:translate-y-0 ${
-            type === "previous" ? "rotate-180" : ""
-        }`}
+        className={`w-10 h-10 flex items-center justify-center mx-2 bg-neutral-200 dark:bg-neutral-800 rounded-full transition-transform hover:-translate-y-0.5 active:translate-y-0 ${type === "previous" ? "rotate-180" : ""
+            }`}
         title={title}
         onClick={handleClick}
         aria-label={title}
@@ -102,7 +115,7 @@ const CarouselControl = memo(({ type, title, handleClick }) => (
 
 CarouselControl.displayName = "CarouselControl";
 
-export default function Carousel({ slides, sectionTitle = "Conheça mais sobre nossos serviços" }) {
+export default function Carousel({ slides, sectionTitle = "Nossos Serviços" }) {
     const [current, setCurrent] = useState(0);
     const intervalRef = useRef(null);
     const id = useId();
@@ -138,11 +151,11 @@ export default function Carousel({ slides, sectionTitle = "Conheça mais sobre n
 
     return (
         <section className="flex flex-col items-center py-8 ">
-            <h2 className="text-3xl md:text-4xl font-bold text-center uppercase mb-12 text-lime-800 ">
+            <h2 className="text-3xl md:text-4xl font-bold text-center uppercase mb-12 text-green-500 ">
                 {sectionTitle}
             </h2>
-            
-            <div 
+
+            <div
                 className="relative w-[70vmin] h-[70vmin] mx-auto"
                 aria-labelledby={`carousel-heading-${id}`}
             >
@@ -162,7 +175,7 @@ export default function Carousel({ slides, sectionTitle = "Conheça mais sobre n
                         />
                     ))}
                 </ul>
-                
+
                 <div className="absolute flex justify-center w-full top-[calc(100%+1rem)]">
                     <CarouselControl
                         type="previous"

@@ -1,11 +1,48 @@
 .hero {
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/imgs/yogaarLivre.avif');
-    background-size: cover;
-    background-position: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('/imgs/yogaARlivre.jpg');
+    background-size: contain;
+    background-position: bottom;
+    background-repeat: repeat;
+    z-index: -1;
+}
+
+/* Cria uma máscara para a imagem central */
+.hero::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    max-width: 100%; /* Ajuste conforme necessário */
+    max-height: 100%; /* Ajuste conforme necessário */
+    background: url('/imgs/yogaARlivre.jpg');
+    background-size: contain;
+    background-position: bottom;
+    background-repeat: no-repeat;
+    z-index: -1;
+}
+
+/* Aplica blur apenas nas repetições (no ::before) */
+.hero::before {
+    filter: blur(4px) saturate(1.5);
 }
 
 @media(min-width:640px) {
-    .hero.parallax {
+    .hero.parallax::before,
+    .hero.parallax::after {
         background-attachment: fixed;
     }
 }

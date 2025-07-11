@@ -44,19 +44,19 @@ const App = () => {
     <main className="relative min-h-screen w-screen overflow-x-hidden">
       <Navbar />
       <CTA />
-      <TimelineDemo />
-      <Hero />
       <Numeros />
-      
+      <CarouselDemo />
       <BordaOndulada direcao="bottom" />
       <CardHoverEffectDemo />
       <BordaOndulada direcao="top" />
-      <CarouselDemo />
-
       <InfiniteMovingCardsDemo />
+      <Calendario eventos={meusEventos} />
+      <Hero />
+      <TimelineDemo />
+      
+
       <Chamado />
       
-      <Calendario eventos={meusEventos} />
       <VoltarPraCima />
       <Footer />
     </main>

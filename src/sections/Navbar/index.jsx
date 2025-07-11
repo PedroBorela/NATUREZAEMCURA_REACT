@@ -9,7 +9,7 @@ const NavItems = ({ isMobile = false, onClick, corTexto }) => {
                 <li key={id}>
                     <a
                         href={href}
-                        className={`nav-link nav-li_a ${corTexto} hover:text-verdeEsmeralda-500 ${isMobile ? 'block text-base px-3 py-2 ' : ''}`}
+                        className={`nav-link nav-li_a ${corTexto} hover:text-verdeEsmeralda-500 hover:bg-slate-50 ${isMobile ? 'block text-base px-3 py-2 ' : ''}`}
                         onClick={onClick}
                     >
                         {name}
@@ -46,13 +46,13 @@ const Navbar = () => {
 
                     </div>
 
-                    <nav className="hidden md:block">
+                    <nav className="hidden lg:block">
                         <NavItems corTexto={'text-gray-700'} />
                     </nav>
 
-                    <div className="md:hidden">
+                    <div className="lg:hidden">
                         <button
-                            className="mobile-menu-button p-2 rounded-md text-gray-700 hover:text-verdeEsmeralda-400 focus:outline-none"
+                            className="mobile-menu-button p-2 rounded-md text-gray-700 hover:text-verdeEsmeralda-400  focus:outline-none"
                             onClick={toggleMenu}
                         >
                             <i className={`fas ${isOpen ? 'fa-times' : 'fa-bars'} text-2xl`} />
@@ -62,7 +62,7 @@ const Navbar = () => {
             </div>
 
             {/* Menu mobile */}
-            <div className={`nav-sidebar sm:block md:hidden ${isOpen ? 'max-h-screen' : 'max-h-0'}`}>
+            <div className={`nav-sidebar md:block lg:hidden ${isOpen ? 'max-h-screen' : 'max-h-0'}`}>
                 <nav className="p-5">
                     <NavItems corTexto={'text-white'} isMobile={true} onClick={closeMenu} />
                 </nav>

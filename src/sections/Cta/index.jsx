@@ -85,7 +85,7 @@ const CTA = () => {
                         ref={logoRef}
                         src="/imgs/logo.png"
                         alt="Psicólogo em sessão"
-                        className="rounded-lg w-full h-auto md:max-h-[325px]  object-contain transition-transform"
+                        className="rounded-lg w-full  h-auto  md:max-h-[325px] object-contain object-center transition-transform"
                         loading="lazy" // Add lazy loading
                     />
                 </h1>
@@ -102,7 +102,7 @@ const CTA = () => {
 
                 <p
                     ref={descriptionRef}
-                    className="md:text-base max-w-3xl text-sm mx-auto mb-10 font-serif font-bold tracking-wide text-white lg: py-2"
+                    className="md:text-lg max-w-3xl text-sm mx-auto px-20 mb-10  font-serif font-bold tracking-wide text-white lg: py-2"
                     style={{
                         textShadow: '0 0 12px #8388f1, 0 0 24px #8388f1',
                     }}
@@ -125,7 +125,7 @@ const CTA = () => {
                     >
                         <ShinyText text="Quero me inscrever!" />
                     </StarBorder>
-                    <BotaoSeta texto="Saiba mais" />
+                    <BotaoSeta texto="Saiba mais" referencia="#servicos" />
                 </div>
             </div>
         </section>
