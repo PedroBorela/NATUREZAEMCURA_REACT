@@ -74,10 +74,10 @@ const Slide = memo(({ slide, index, current, handleSlideClick }) => {
 
                 {/* Conteúdo superior */}
                 <article className={`relative p-[6vmin] w-full transition-opacity duration-1000 ${current === index ? "opacity-100" : "opacity-0"}`}>
-                    <h2 className="text-lg md:text-2xl lg:text-4xl font-semibold ">
+                    <h2 className="text-md md:text-2xl lg:text-3xl font-semibold ">
                         {title}
                     </h2>
-                    <p className="mt-6 text-orquideaLilas-100 text-sm text-wrap md:text-base font-medium break-words">
+                    <p className="mt-6 text-orquideaLilas-100 text-xs text-wrap md:text-base font-medium break-words">
                         {button}
                     </p>
                 </article>
