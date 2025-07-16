@@ -73,11 +73,11 @@ const Slide = memo(({ slide, index, current, handleSlideClick }) => {
                 </div>
 
                 {/* Conteúdo superior */}
-                <article className={`relative p-[4vmin] w-full transition-opacity duration-1000 ${current === index ? "opacity-100" : "opacity-0"}`}>
-                    <h2 className="text-lg md:text-2xl lg:text-4xl font-semibold">
+                <article className={`relative p-[6vmin] w-full transition-opacity duration-1000 ${current === index ? "opacity-100" : "opacity-0"}`}>
+                    <h2 className="text-lg md:text-2xl lg:text-4xl font-semibold ">
                         {title}
                     </h2>
-                    <p className="mt-6 text-orquideaLilas-100 text-sm md:text-base font-medium">
+                    <p className="mt-6 text-orquideaLilas-100 text-sm text-wrap md:text-base font-medium break-words">
                         {button}
                     </p>
                 </article>
@@ -91,7 +91,7 @@ const Slide = memo(({ slide, index, current, handleSlideClick }) => {
                             // Adicione aqui a ação do botão
                         }}
                     >
-                        Saiba mais
+                        Quero participar!
                     </button>
                 </div>
             </li>
@@ -141,7 +141,7 @@ export default function Carousel({ slides, sectionTitle = "Nossos Serviços" }) 
         clearInterval(intervalRef.current);
         intervalRef.current = setInterval(() => {
             setCurrent(prev => (prev + 1) % slides.length);
-        }, 5000);
+        }, 10000);
     }, [slides.length]);
 
     useEffect(() => {

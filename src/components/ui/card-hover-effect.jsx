@@ -27,6 +27,7 @@ const CardTitle = memo(({ className, children }) => {
         <h4 className={cn("text-white text-lg font-bold tracking-wide mt-4", className)}>
             {children}
         </h4>
+        
     );
 });
 
@@ -89,6 +90,9 @@ export const HoverEffect = memo(({ items, className }) => {
                     <Card>
                         {item.icon && <div className="text-2xl text-white">{item.icon}</div>}
                         <CardTitle>{item.title}</CardTitle>
+                        <p className="text-white/80 text-sm italic mt-1">
+                                {item.subtitle}
+                            </p>
                         <CardDescription>{item.description}</CardDescription>
                     </Card>
                 </div>
