@@ -12,7 +12,37 @@ import VoltarPraCima from "./components/voltarPraCima"
 import { InfiniteMovingCardsDemo } from "./components/Testimonial"
 import Chamado from "./sections/Chamado"
 import Calendario from "./sections/Calendario"
+import { useEffect, useState } from "react"
+
+
+
+const LoadingScreen = () => (
+  <div className="fixed inset-0 bg-verdeEsmeralda-200 backdrop-blur-sm flex flex-col justify-center items-center z-50">
+    <div className="flex space-x-2">
+      <div className="w-4 h-4 bg-orquideaLilas-500 rounded-full animate-pulse" style={{ animationDelay: '0s', animationDuration: '1.5s' }}></div>
+      <div className="w-4 h-4 bg-orquideaLilas-500 rounded-full animate-pulse" style={{ animationDelay: '0.2s', animationDuration: '1.5s' }}></div>
+      <div className="w-4 h-4 bg-orquideaLilas-500 rounded-full animate-pulse" style={{ animationDelay: '0.4s', animationDuration: '1.5s' }}></div>
+    </div>
+    <p className="mt-6 text-lg text-orquideaLilas-700 tracking-wider font-light">
+      Despertando a energia...
+    </p>
+  </div>
+);
+
+
 const App = () => {
+
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 3000); // 2.5 segundos
+
+    // Limpa o timer se o componente for desmontado
+    return () => clearTimeout(timer);
+  }, []);
+
   const meusEventos = [
     { id: 1, title: "Aula de Yoga ao Nascer do Sol", date: "2025-07-06", color: "bg-orquideaLilas-300" },
     { id: 2, title: "Curso de Reiki Nível I", date: "2025-07-12", color: "bg-azulArpoador-300" },
@@ -38,7 +68,9 @@ const App = () => {
     { id: 20, title: "Cacau e Meditação Guiada", date: "2025-09-27", color: "bg-verdeEsmeralda-400" },
     { id: 21, title: "Círculo de Mulheres na Natureza", date: "2025-09-28", color: "bg-orquideaLilas-500" }
   ];
-
+  if (isLoading) {
+    return <LoadingScreen />;
+  }
 
   return (
     <main className="relative min-h-screen w-screen overflow-x-hidden">
@@ -53,10 +85,10 @@ const App = () => {
       <Calendario eventos={meusEventos} />
       <Hero />
       <TimelineDemo />
-      
+
 
       <Chamado />
-      
+
       <VoltarPraCima />
       <Footer />
     </main>
