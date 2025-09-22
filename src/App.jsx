@@ -37,7 +37,7 @@ const App = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 3500); // 3.5 segundos
+    }, 2500); // 2.5 segundos
 
     // Limpa o timer se o componente for desmontado
     return () => clearTimeout(timer);
