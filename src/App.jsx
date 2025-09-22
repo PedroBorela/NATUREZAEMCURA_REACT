@@ -37,7 +37,7 @@ const App = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 3000); // 2.5 segundos
+    }, 3500); // 3.5 segundos
 
     // Limpa o timer se o componente for desmontado
     return () => clearTimeout(timer);
@@ -87,7 +87,7 @@ const App = () => {
       <TimelineDemo />
 
 
-      <Chamado />
+      {/* <Chamado /> */}
 
       <VoltarPraCima />
       <Footer />

@@ -1,171 +1,132 @@
+// carousel.jsx
+
 "use client";
 import { IconArrowNarrowRight } from "@tabler/icons-react";
-import React, { lazy, useState, useRef, useId, useEffect, useCallback, memo, Suspense, useMemo } from "react";
+import React, { lazy, useState, useRef, useEffect, useCallback, memo } from "react";
 
 const Slide = lazy(() => import('../carrossel/slide'));
 
 const CarouselControl = memo(({ type, title, handleClick, disabled }) => (
     <button
-        className={`w-10 h-10 flex items-center justify-center mx-2 bg-neutral-200 dark:bg-neutral-800 rounded-full transition-transform hover:-translate-y-0.5 active:translate-y-0 ${type === "previous" ? "rotate-180" : ""
-            } ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
+        className={`w-10 h-10 flex items-center justify-center mx-2 bg-neutral-200 dark:bg-neutral-800 rounded-full transition-all hover:scale-110 active:scale-100 ${type === "previous" ? "rotate-180" : ""} ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
         title={title}
         onClick={handleClick}
-        aria-label={title}
         disabled={disabled}
+        aria-label={title}
     >
         <IconArrowNarrowRight className="text-neutral-600 dark:text-neutral-200" />
     </button>
 ));
-
 CarouselControl.displayName = "CarouselControl";
 
 export default function Carousel({ slides, sectionTitle = "Nossos Serviços" }) {
     const [current, setCurrent] = useState(0);
-    const [isTransitioning, setIsTransitioning] = useState(false);
-    const intervalRef = useRef(null);
+    const [isAnimating, setIsAnimating] = useState(false);
     const timeoutRef = useRef(null);
-    const id = useId();
+    const autoPlayRef = useRef(null);
+    const slidesLength = slides.length;
 
-    // Memoizar cálculos pesados
-    const slidesLength = useMemo(() => slides.length, [slides.length]);
+    const goToSlide = useCallback((newIndex) => {
+        if (isAnimating) return;
 
-    const transformStyle = useMemo(() => ({
-        transform: `translateX(-${current * (100 / slidesLength)}%)`,
-        willChange: isTransitioning ? 'transform' : 'auto'
-    }), [current, slidesLength, isTransitioning]);
+        setIsAnimating(true);
+        const finalIndex = (newIndex + slidesLength) % slidesLength;
+        setCurrent(finalIndex);
 
-    // Debounce das mudanças de slide
-    const debouncedSetCurrent = useCallback((newIndex) => {
-        if (isTransitioning) return;
-
-        setIsTransitioning(true);
-        setCurrent(newIndex);
-
-        // Usar requestAnimationFrame para suavizar a transição
-        requestAnimationFrame(() => {
-            timeoutRef.current = setTimeout(() => {
-                setIsTransitioning(false);
-            }, 300); // Duração da animação CSS
-        });
-    }, [isTransitioning]);
-
-    const handlePreviousClick = useCallback(() => {
-        const newIndex = (current - 1 + slidesLength) % slidesLength;
-        debouncedSetCurrent(newIndex);
-        resetAutoPlay();
-    }, [current, slidesLength, debouncedSetCurrent]);
-
-    const handleNextClick = useCallback(() => {
-        const newIndex = (current + 1) % slidesLength;
-        debouncedSetCurrent(newIndex);
-        resetAutoPlay();
-    }, [current, slidesLength, debouncedSetCurrent]);
-
-    const handleSlideClick = useCallback((index) => {
-        if (current !== index && !isTransitioning) {
-            debouncedSetCurrent(index);
-            resetAutoPlay();
-        }
-    }, [current, isTransitioning, debouncedSetCurrent]);
-
+        // O timeout agora tem uma duração que corresponde à transição do CSS (duration-500)
+        timeoutRef.current = setTimeout(() => {
+            setIsAnimating(false);
+        }, 500);
+    }, [isAnimating, slidesLength]);
+    
+    // Função para resetar o autoplay ao interagir manualmente
     const resetAutoPlay = useCallback(() => {
-        if (intervalRef.current) {
-            clearInterval(intervalRef.current);
-        }
-
-        // Usar requestIdleCallback se disponível
-        const scheduleAutoPlay = () => {
-            intervalRef.current = setInterval(() => {
-                setCurrent(prev => {
-                    const newIndex = (prev + 1) % slidesLength;
-                    return newIndex;
-                });
-            }, 10000);
-        };
-
-        if (window.requestIdleCallback) {
-            requestIdleCallback(scheduleAutoPlay);
-        } else {
-            setTimeout(scheduleAutoPlay, 0);
-        }
+        if (autoPlayRef.current) clearInterval(autoPlayRef.current);
+        
+        autoPlayRef.current = setInterval(() => {
+            // Usamos a forma funcional para não depender do 'current' aqui
+            setCurrent(prev => (prev + 1) % slidesLength);
+        }, 10000);
     }, [slidesLength]);
 
-    // Cleanup melhorado
-    useEffect(() => {
+
+    const handlePreviousClick = useCallback(() => {
+        goToSlide(current - 1);
         resetAutoPlay();
+    }, [current, goToSlide, resetAutoPlay]);
+
+    const handleNextClick = useCallback(() => {
+        goToSlide(current + 1);
+        resetAutoPlay();
+    }, [current, goToSlide, resetAutoPlay]);
+
+    const handleIndicatorClick = useCallback((index) => {
+        goToSlide(index);
+        resetAutoPlay();
+    }, [goToSlide, resetAutoPlay]);
+
+    // Efeito para o autoplay
+    useEffect(() => {
+        if (slidesLength > 1) {
+            resetAutoPlay();
+        }
+        // A função de limpeza aqui limpa APENAS o intervalo do autoplay
         return () => {
-            if (intervalRef.current) {
-                clearInterval(intervalRef.current);
+            if (autoPlayRef.current) {
+                clearInterval(autoPlayRef.current);
             }
+        };
+    }, [slidesLength, resetAutoPlay]);
+
+    // Efeito para limpar o timeout APENAS quando o componente for desmontado
+    useEffect(() => {
+        return () => {
             if (timeoutRef.current) {
                 clearTimeout(timeoutRef.current);
             }
         };
-    }, [resetAutoPlay]);
+    }, []);
 
-    // Preload próximo slide
-    const preloadSlides = useMemo(() => {
-        const nextIndex = (current + 1) % slidesLength;
-        const prevIndex = (current - 1 + slidesLength) % slidesLength;
-        return [prevIndex, current, nextIndex];
-    }, [current, slidesLength]);
 
     return (
-        <section className="flex flex-col items-center py-8">
+        <section className="flex flex-col items-center py-8 w-full overflow-hidden">
             <h2 className="text-3xl md:text-4xl font-bold text-center uppercase mb-12 text-green-500">
                 {sectionTitle}
             </h2>
 
-            <div
-                className="relative w-[70vmin] h-[70vmin] mx-auto"
-                aria-labelledby={`carousel-heading-${id}`}
-            >
+            <div className="relative w-[70vmin] h-[70vmin] mx-auto">
                 <ul
-                    className="absolute flex mx-[-4vmin] transition-transform duration-300 ease-out"
-                    style={transformStyle}
+                    className="absolute flex transition-transform duration-500 ease-in-out"
+                    style={{
+                        width: `${slidesLength * 100}%`,
+                        transform: `translateX(-${current * (100 / slidesLength)}%)`
+                    }}
                 >
-                    <Suspense fallback={<div className="w-full h-full bg-neutral-200 animate-pulse" />}>
-                        {slides.map((slide, index) => (
-                            <Slide
-                                key={`${id}-${index}`}
-                                slide={slide}
-                                index={index}
-                                current={current}
-                                handleSlideClick={handleSlideClick}
-                                shouldLoad={preloadSlides.includes(index)}
-                            />
-                        ))}
-                    </Suspense>
+                    {slides.map((slide, index) => (
+                        <Slide
+                            key={index}
+                            slide={slide}
+                            index={index}
+                            current={current}
+                            handleSlideClick={handleIndicatorClick}
+                        />
+                    ))}
                 </ul>
 
-                <div className="absolute flex justify-center w-full top-[calc(100%+1rem)]">
-                    <CarouselControl
-                        type="previous"
-                        title="Ir para o slide anterior"
-                        handleClick={handlePreviousClick}
-                        disabled={isTransitioning}
-                    />
-                    <CarouselControl
-                        type="next"
-                        title="Ir para o próximo slide"
-                        handleClick={handleNextClick}
-                        disabled={isTransitioning}
-                    />
+                <div className="absolute flex justify-between w-[calc(100%+4rem)] top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 z-20">
+                    <CarouselControl type="previous" title="Anterior" handleClick={handlePreviousClick} disabled={isAnimating} />
+                    <CarouselControl type="next" title="Próximo" handleClick={handleNextClick} disabled={isAnimating} />
                 </div>
             </div>
 
-            {/* Indicadores de slide */}
-            <div className="flex justify-center mt-4 space-x-2">
+            <div className="flex justify-center mt-20 space-x-2">
                 {slides.map((_, index) => (
                     <button
                         key={index}
-                        className={`w-3 h-3 rounded-full transition-colors ${index === current
-                                ? 'bg-green-500'
-                                : 'bg-neutral-300 hover:bg-neutral-400'
-                            }`}
-                        onClick={() => handleSlideClick(index)}
+                        className={`w-3 h-3 rounded-full transition-colors ${index === current ? 'bg-green-500' : 'bg-neutral-300 hover:bg-neutral-400'}`}
+                        onClick={() => handleIndicatorClick(index)}
                         aria-label={`Ir para slide ${index + 1}`}
-                        disabled={isTransitioning}
+                        disabled={isAnimating}
                     />
                 ))}
             </div>

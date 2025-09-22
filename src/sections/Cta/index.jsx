@@ -150,7 +150,7 @@ const CTA = () => {
                         {/* Fallback para navegadores mais antigos */}
                         <img
                             ref={logoRef}
-                            src="/imgs/logo.png"
+                            src="/imgs/logo.webp"
                             alt="Logo Natureza e Cura"
                             className="rounded-lg w-full h-auto md:max-h-[325px] object-contain object-center"
                             width="325" // Dimensões explícitas para evitar layout shift
