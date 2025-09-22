@@ -6,7 +6,7 @@ export function CarouselDemo() {
         {
             title: "Aulas de Yoga no Estúdio.",
             button: "Venha participar de nossas aulas particulares no Estúdio da Natureza em Cura, vagas limitadas para 10 pessoas. Aula Terça-Feira 18:00 e 19:30. Apenas 7 vagas disponíveis.",
-            src: "./imgs/aulanoestudio.jpg",
+            src: "./imgs/aulanoestudio.webp",
         },
         {
             title: "Aulas de Yoga nos postinhos de saúde",
@@ -17,21 +17,21 @@ export function CarouselDemo() {
             title: "Sessões e Cursos de Reiki 1, 2 e 3",
             button: "Marque sua sessão de Reiki com Allan Borela ou aprenda tudo que precisa para cuidar e equilibrar sua própria energia, canalizar energia de cura para si e para os outros, Desperte sua Consciência Espiritual e se torne um Terapeuta Reiki.",
 
-            src: "./imgs/rodacura.jpg",
+            src: "./imgs/rodacura_1.webp",
         },
         {
             title: "Cerimônias Espirituais Indígenas",
             button: "Participe de nossas Cerimônias Espirituais Xamânicas realizadas por Mestres de Cerimônia especialistas do Rio de Janeiro, que é o Xamã Sandro Shankara e sua companheira Rosane Ventura, encontros realizados de 01 a 02 vezes por ano, com as Medicinas da Floresta, Ayahuasca, Rapé, Sananga. Inscrição personalizada e limitada. ",
-            src: "./imgs/cerimoniaespiritual.jpg",
+            src: "./imgs/cerimoniaespiritual_1.webp",
         }, {
             title: "Cerimônia de Cacau Medicinal",
             button: "Conheça a Cacau Medicinal e toda essa cultura ancestral que nos reconecta com nosso coração sagrado, ajudando a equilibrar o Sagrado Feminino com o Masculino.",
-            src: "./imgs/cerimoniacacau.JPG",
+            src: "./imgs/cerimoniacacau.webp",
         },
     ];
     return (
         <div className="relative overflow-hidden w-full h-full py-10" id="servicos">
-            <img className="selector w-[800px] h-auto inset-0  mx-auto my-auto z-[-1] pointer-events-none absolute " src="/imgs/yogafundo.png" />
+            <img className="selector w-[800px] h-auto inset-0  mx-auto my-auto z-[-1] pointer-events-none absolute " src="/imgs/yogafundo.webp" />
 
             <Carousel slides={slideData} />
         </div>

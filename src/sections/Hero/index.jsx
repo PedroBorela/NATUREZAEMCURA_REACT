@@ -115,7 +115,7 @@ const Hero = () => {
       {/* Decorative mandala */}
       <img 
         className="selector w-[800px] lg:w-[1250px] h-auto absolute z-0 -bottom-20 lg:-top-20 lg:bottom-0 opacity-20 right-0 pointer-events-none" 
-        src="/imgs/mandala.png" 
+        src="/imgs/mandala.webp" 
         alt="Decorative mandala"
         loading="lazy"
       />
