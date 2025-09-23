@@ -57,7 +57,7 @@ const Hero = () => {
     <section 
       id="sobre" 
       ref={sectionRef} 
-      className="py-12 lg:py-20 min-h-36 bg-[url('/imgs/fundodesfoc.jpg')] bg-cover bg-center relative overflow-hidden"
+      className="py-12 lg:py-20 min-h-36 bg-green-800 bg-cover bg-center relative overflow-hidden"
     >
       <div className="max-w-7xl mx-auto py-6 lg:py-10 px-4 sm:px-6 lg:px-8">
         {/* Title section */}

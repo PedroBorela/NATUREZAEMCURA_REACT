@@ -48,7 +48,7 @@ const CTA = () => {
                     observer.disconnect();
                 }
             },
-            { 
+            {
                 threshold: 0.1,
                 rootMargin: '100px 0px' // Pré-carrega antes de ser visível
             }
@@ -66,12 +66,12 @@ const CTA = () => {
         if (!isVisible || animationsLoaded) return;
 
         let gsap;
-        
+
         const loadGSAP = async () => {
             try {
                 const gsapModule = await import('gsap');
                 gsap = gsapModule.default;
-                
+
                 // Animar apenas elementos críticos inicialmente
                 const tl = gsap.timeline({
                     defaults: {
@@ -80,31 +80,10 @@ const CTA = () => {
                     }
                 });
 
-                // Estados iniciais mais suaves
-                gsap.set([logoRef.current, headRef.current, descriptionRef.current, buttonsRef.current], {
-                    opacity: 0,
-                });
-
-                gsap.set(logoRef.current, { scale: 0.95, y: -20 });
-                gsap.set([headRef.current, descriptionRef.current], { y: 20 });
-                gsap.set(buttonsRef.current, { scale: 0.98 });
-
-                // Sequência de animação mais rápida
-                tl.to(logoRef.current, {
-                    opacity: 1,
-                    scale: 1,
-                    y: 0,
-                    duration: 0.6
-                })
-                .to([headRef.current, descriptionRef.current], {
-                    opacity: 1,
-                    y: 0,
-                    stagger: 0.1
-                }, '-=0.3')
-                .to(buttonsRef.current, {
-                    opacity: 1,
-                    scale: 1
-                }, '-=0.2');
+                // Anima de um estado inicial sutil para o estado final
+                tl.from(logoRef.current, { scale: 0.95, y: -20, duration: 0.6 })
+                    .from([headRef.current, descriptionRef.current], { y: 20, stagger: 0.1 }, '-=0.3')
+                    .from(buttonsRef.current, { scale: 0.98 }, '-=0.2');
 
                 // Animação de pulse mais sutil e performática
                 gsap.to(logoRef.current, {
@@ -119,11 +98,7 @@ const CTA = () => {
 
             } catch (error) {
                 console.warn('Failed to load GSAP:', error);
-                // Fallback: mostrar conteúdo sem animação
-                if (logoRef.current) logoRef.current.style.opacity = '1';
-                if (headRef.current) headRef.current.style.opacity = '1';
-                if (descriptionRef.current) descriptionRef.current.style.opacity = '1';
-                if (buttonsRef.current) buttonsRef.current.style.opacity = '1';
+
             }
         };
 
@@ -137,28 +112,24 @@ const CTA = () => {
     }, [isVisible, animationsLoaded]);
 
     return (
-        <section 
+        <section
             ref={sectionRef}
-            id="home" 
+            id="home"
             className="hero parallax min-h-screen flex items-center justify-center text-white pt-20"
         >
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
                 <h1 className="text-5xl md:text-7xl font-bold mb-6">
-                   {/*} <picture> */}
-                        {/* WebP para navegadores modernos */}
-                        {/*<source srcSet="/imgs/logo.webp" type="image/webp" /> */}
-                        {/* Fallback para navegadores mais antigos */}
-                        <img
-                            ref={logoRef}
-                            src="/imgs/logo.webp"
-                            alt="Logo Natureza e Cura"
-                            className="rounded-lg w-full h-auto md:max-h-[325px] object-contain object-center"
-                            width="325" // Dimensões explícitas para evitar layout shift
-                            height="325"
-                            fetchPriority="high" // Priorizar o carregamento
-                            decoding="async"
-                            style={{ opacity: isVisible ? undefined : 1 }} // Mostrar imediatamente se animações não carregaram
-                        />
+                    <img
+                        ref={logoRef}
+                        src="/imgs/logo.webp"
+                        alt="Logo Natureza e Cura"
+                        className="rounded-lg w-full h-auto md:max-h-[325px] object-contain object-center"
+                        width="325" // Dimensões explícitas para evitar layout shift
+                        height="325"
+                        fetchPriority="high" // Priorizar o carregamento
+                        decoding="async"
+                        style={{ opacity: isVisible ? undefined : 1 }} // Mostrar imediatamente se animações não carregaram
+                    />
                     {/*</picture> */}
                 </h1>
 
@@ -204,7 +175,7 @@ const CTA = () => {
                             </Suspense>
                         </StarBorder>
                     </Suspense>
-                    
+
                     <Suspense fallback={<BotaoSetaPlaceholder />}>
                         <BotaoSeta texto="Saiba mais" referencia="#servicos" />
                     </Suspense>

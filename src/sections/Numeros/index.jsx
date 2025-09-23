@@ -12,7 +12,7 @@ import { SiReasonstudios } from "react-icons/si";
 
 const Numeros = () => {
     return (
-        <div className="bg-[url('/imgs/fundodesfoc.jpg')] drop-shadow-xl text-white py-20">
+        <div className="bg-gradient-to-br from-green-800 via-green-700 to-green-400 to-90% drop-shadow-xl text-white py-20">
             <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-8 text-center px-4">
                 {/* Item 1 */}
                 <div className="p-4">
@@ -87,10 +87,7 @@ const Numeros = () => {
                 </div>
             </div>
 
-            <ScrollVelocity 
-                className="text-orquideaLilas-200 relative text-shadow-lg/30 pt-5 z-10" 
-                texts={['#PazInterior #Meditação #SaúdeMental', '#TerapiaComplementar #SabedoriaAncestral']} 
-            />
+            {/* <ScrollVelocity className="text-orquideaLilas-200 relative text-shadow-lg/30 pt-5 z-10" texts={['#PazInterior #Meditação #SaúdeMental', '#TerapiaComplementar #SabedoriaAncestral']}  /> */}
         </div>
     );
 };
