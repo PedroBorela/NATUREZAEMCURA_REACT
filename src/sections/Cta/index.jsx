@@ -50,7 +50,7 @@ const CTA = () => {
             },
             {
                 threshold: 0.1,
-                rootMargin: '100px 0px' // Pré-carrega antes de ser visível
+                rootMargin: '100px 0px' 
             }
         );
 
@@ -76,7 +76,7 @@ const CTA = () => {
                 const tl = gsap.timeline({
                     defaults: {
                         ease: 'power2.out',
-                        duration: 0.8 // Duração reduzida
+                        duration: 0.8 
                     }
                 });
 
