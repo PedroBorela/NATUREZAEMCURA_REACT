@@ -1,56 +1,50 @@
 import { useEffect, useRef } from "react";
 import Bullet from "../../components/Bullet.jsx";
 import SpotlightCard from "../../components/SpotlightCard/SpotlightCard";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import gsap from "gsap";
-
-
-gsap.registerPlugin(ScrollTrigger);
+import { FaLeaf, FaGraduationCap } from "react-icons/fa";
 
 const Hero = () => {
   const sectionRef = useRef(null);
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      const animationDefaults = {
-        opacity: 0,
-        duration: 1,
-        ease: "power3.out"
-      };
+    const el = sectionRef.current;
+    if (!el) return;
 
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 80%",
-          toggleActions: "play none none none"
-        }
-      });
+    const observer = new IntersectionObserver(
+      async ([entry]) => {
+        if (!entry.isIntersecting) return;
+        observer.disconnect();
 
-      tl.from(".hero-img", {
-        ...animationDefaults,
-        x: -50
-      })
-        .from(".hero-title", {
-          ...animationDefaults,
-          y: 40
-        }, "-=0.8")
-        .from(".hero-paragraph", {
-          ...animationDefaults,
-          y: 30,
-          stagger: 0.2
-        }, "-=0.7")
-        .from(".hero-bullet", {
-          ...animationDefaults,
-          y: 30
-        }, "-=0.6")
-        .from(".selector", {
-          ...animationDefaults,
-          scale: 0.95,
-          duration: 2
-        }, "-=1");
-    }, sectionRef);
+        const [{ default: gsap }, { ScrollTrigger }] = await Promise.all([
+          import("gsap"),
+          import("gsap/ScrollTrigger"),
+        ]);
+        gsap.registerPlugin(ScrollTrigger);
 
-    return () => ctx.revert();
+        const ctx = gsap.context(() => {
+          const animationDefaults = { opacity: 0, duration: 1, ease: "power3.out" };
+
+          gsap.timeline({
+            scrollTrigger: {
+              trigger: el,
+              start: "top 80%",
+              toggleActions: "play none none none",
+            },
+          })
+            .from(".hero-img", { ...animationDefaults, x: -50 })
+            .from(".hero-title", { ...animationDefaults, y: 40 }, "-=0.8")
+            .from(".hero-paragraph", { ...animationDefaults, y: 30, stagger: 0.2 }, "-=0.7")
+            .from(".hero-bullet", { ...animationDefaults, y: 30 }, "-=0.6")
+            .from(".selector", { ...animationDefaults, scale: 0.95, duration: 2 }, "-=1");
+        }, el);
+
+        return () => ctx.revert();
+      },
+      { threshold: 0.1 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
   }, []);
 
   return (
@@ -60,7 +54,6 @@ const Hero = () => {
       className="py-12 lg:py-20 min-h-36 bg-green-800 bg-cover bg-center relative overflow-hidden"
     >
       <div className="max-w-7xl mx-auto py-6 lg:py-10 px-4 sm:px-6 lg:px-8">
-        {/* Title section */}
         <div className="text-center mb-10 lg:mb-16">
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-4">
             Curar é Relembrar <span className="text-verdeEsmeralda-200">Quem Somos</span>
@@ -70,9 +63,7 @@ const Hero = () => {
           </p>
         </div>
 
-        {/* Content container - changes to row on lg screens */}
         <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-0">
-          {/* Image column - full width on mobile/tablet, half on lg+ */}
           <div className="w-full lg:w-1/2 lg:pr-10">
             <SpotlightCard className="z-10">
               <img
@@ -80,11 +71,11 @@ const Hero = () => {
                 alt="Allan Borela"
                 className="hero-img rounded-lg w-full h-auto max-h-[400px] lg:max-h-[500px] object-cover"
                 loading="lazy"
+                decoding="async"
               />
             </SpotlightCard>
           </div>
 
-          {/* Text column - full width on mobile/tablet, half on lg+ */}
           <div className="w-full lg:w-1/2 z-10 mt-6 lg:mt-0 lg:pl-10">
             <h2 className="hero-title text-3xl lg:text-4xl font-bold mb-4 lg:mb-6 text-white">
               Allan Borela
@@ -99,11 +90,11 @@ const Hero = () => {
             </p>
 
             <div className="hero-bullet flex flex-wrap gap-3 lg:gap-4">
-              <Bullet />
+              <Bullet icon={<FaGraduationCap />} />
               <Bullet
                 titulo="Diferencial"
                 texto="Ciência e Sabedoria Ancestral em União"
-                icon="fa-leaf"
+                icon={<FaLeaf />}
                 corTitulo="#5F6F52"
                 corFundo="#A9B388"
               />
@@ -112,12 +103,12 @@ const Hero = () => {
         </div>
       </div>
 
-      {/* Decorative mandala */}
       <img
         className="selector w-[800px] lg:w-[1250px] h-auto absolute z-0 -bottom-20 lg:-top-20 lg:bottom-0 opacity-20 right-0 pointer-events-none"
         src="/imgs/mandala.webp"
-        alt="Decorative mandala"
+        alt=""
         loading="lazy"
+        decoding="async"
       />
     </section>
   );

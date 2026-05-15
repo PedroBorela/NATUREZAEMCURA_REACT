@@ -12,55 +12,50 @@ import {
     FaFemale
 } from "react-icons/fa";
 import "./cards.css"
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useEffect, useRef } from "react";
-import gsap from "gsap";
 import { GiCrystalBars } from "react-icons/gi";
 import { BiDrink } from "react-icons/bi";
-
-
-gsap.registerPlugin(ScrollTrigger);
 
 export function CardHoverEffectDemo() {
     const containerRef = useRef(null);
 
     useEffect(() => {
-        const ctx = gsap.context(() => {
-            gsap.from(".title", {
-                y: 50,
-                opacity: 0,
-                duration: 1,
-                ease: "power3.out",
-                scrollTrigger: {
-                    trigger: ".title",
-                    start: "top 80%",
-                },
-            });
+        const el = containerRef.current;
+        if (!el) return;
 
-            gsap.from(".subtitle", {
-                y: 30,
-                opacity: 0,
-                duration: 1,
-                ease: "power3.out",
-                scrollTrigger: {
-                    trigger: ".subtitle",
-                    start: "top 85%",
-                },
-            });
+        const observer = new IntersectionObserver(
+            async ([entry]) => {
+                if (!entry.isIntersecting) return;
+                observer.disconnect();
 
-            gsap.from(".selector", {
-                opacity: 0,
-                scale: 0.95,
-                duration: 1.5,
-                ease: "power2.out",
-                scrollTrigger: {
-                    trigger: ".selector",
-                    start: "top 90%",
-                },
-            });
-        }, containerRef);
+                const [{ default: gsap }, { ScrollTrigger }] = await Promise.all([
+                    import("gsap"),
+                    import("gsap/ScrollTrigger"),
+                ]);
+                gsap.registerPlugin(ScrollTrigger);
 
-        return () => ctx.revert();
+                const ctx = gsap.context(() => {
+                    gsap.from(".title", {
+                        y: 50, opacity: 0, duration: 1, ease: "power3.out",
+                        scrollTrigger: { trigger: ".title", start: "top 80%" },
+                    });
+                    gsap.from(".subtitle", {
+                        y: 30, opacity: 0, duration: 1, ease: "power3.out",
+                        scrollTrigger: { trigger: ".subtitle", start: "top 85%" },
+                    });
+                    gsap.from(".selector", {
+                        opacity: 0, scale: 0.95, duration: 1.5, ease: "power2.out",
+                        scrollTrigger: { trigger: ".selector", start: "top 90%" },
+                    });
+                }, el);
+
+                return () => ctx.revert();
+            },
+            { threshold: 0.1 }
+        );
+
+        observer.observe(el);
+        return () => observer.disconnect();
     }, []);
 
     return (

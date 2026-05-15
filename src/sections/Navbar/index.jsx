@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { navLinks } from "../../constants";
 import './navbar.css';
+import { FaBars, FaTimes } from "react-icons/fa";
 
 const NavItems = ({ isMobile = false, onClick, corTexto }) => {
     return (
@@ -55,7 +56,7 @@ const Navbar = () => {
                             className="mobile-menu-button p-2 rounded-md text-gray-700 hover:text-verdeEsmeralda-400  focus:outline-none"
                             onClick={toggleMenu}
                         >
-                            <i className={`fas ${isOpen ? 'fa-times' : 'fa-bars'} text-2xl`} />
+                            {isOpen ? <FaTimes className="text-2xl" /> : <FaBars className="text-2xl" />}
                         </button>
                     </div>
                 </div>

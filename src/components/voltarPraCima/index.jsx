@@ -1,5 +1,5 @@
-"use client";
 import { useEffect, useRef } from "react";
+import { FaArrowUp } from "react-icons/fa";
 
 const VoltarPraCima = () => {
     const buttonRef = useRef(null);
@@ -42,7 +42,7 @@ const VoltarPraCima = () => {
             className="fixed bottom-8 right-8 bg-gradient-to-br from-azulArpoador-100 to-azulArpoador-300 text-white p-3 rounded-full shadow-lg opacity-0 invisible transition-all duration-300 z-50"
             aria-label="Voltar ao topo"
         >
-            <i className="fas fa-arrow-up"></i>
+            <FaArrowUp />
         </button>
     );
 };

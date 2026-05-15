@@ -1,3 +1,5 @@
+import { FaInstagram, FaFacebookF, FaYoutube, FaMapMarkerAlt, FaPhoneAlt, FaEnvelope } from "react-icons/fa";
+
 const Footer = () => {
     return (
         <footer className=" bg-gradient-to-br from-green-500 via-green-700 to-green-500 to-90% text-slate-200 py-12">
@@ -9,16 +11,19 @@ const Footer = () => {
                             transformação pessoal.</p>
                         <div className="flex space-x-4">
                             <a href="https://www.instagram.com/naturezaemcura/"
-                                className="bg-white bg-opacity-10 p-3 rounded-full hover:bg-opacity-20 transition duration-300">
-                                <i className="fab fa-instagram"></i>
+                                className="bg-white bg-opacity-10 p-3 rounded-full hover:bg-opacity-20 transition duration-300"
+                                aria-label="Instagram">
+                                <FaInstagram />
                             </a>
                             <a href="https://www.facebook.com/naturezaemcura"
-                                className="bg-white bg-opacity-10 p-3 rounded-full hover:bg-opacity-20 transition duration-300">
-                                <i className="fab fa-facebook-f"></i>
+                                className="bg-white bg-opacity-10 p-3 rounded-full hover:bg-opacity-20 transition duration-300"
+                                aria-label="Facebook">
+                                <FaFacebookF />
                             </a>
                             <a href="https://www.youtube.com/@Natureza_em_Cura"
-                                className="bg-white bg-opacity-10 p-3 rounded-full hover:bg-opacity-20 transition duration-300">
-                                <i className="fab fa-youtube"></i>
+                                className="bg-white bg-opacity-10 p-3 rounded-full hover:bg-opacity-20 transition duration-300"
+                                aria-label="YouTube">
+                                <FaYoutube />
                             </a>
                         </div>
                     </div>
@@ -29,8 +34,7 @@ const Footer = () => {
                             <li><a href="#home" className="hover:text-orquideaLilas-200 transition duration-300">Início</a></li>
                             <li><a href="#about" className="hover:text-orquideaLilas-200 transition duration-300">Sobre</a></li>
                             <li><a href="#services" className="hover:text-orquideaLilas-200 transition duration-300">Serviços</a></li>
-                            <li><a href="#testimonials" className="hover:text-orquideaLilas-200 transition duration-300">Depoimentos</a>
-                            </li>
+                            <li><a href="#testimonials" className="hover:text-orquideaLilas-200 transition duration-300">Depoimentos</a></li>
                             <li><a href="#contact" className="hover:text-orquideaLilas-200 transition duration-300">Contato</a></li>
                         </ul>
                     </div>
@@ -38,16 +42,16 @@ const Footer = () => {
                     <div>
                         <h4 className="font-bold text-lg mb-4">Contato</h4>
                         <ul className="space-y-2">
-                            <li className="flex items-start">
-                                <i className="fas fa-map-marker-alt mt-1 mr-2 text-orquideaLilas-200"></i>
+                            <li className="flex items-start gap-2">
+                                <FaMapMarkerAlt className="mt-1 shrink-0 text-orquideaLilas-200" />
                                 <span>Rua da Conceição, 170 - MG</span>
                             </li>
-                            <li className="flex items-start">
-                                <i className="fas fa-phone-alt mt-1 mr-2 text-orquideaLilas-200"></i>
+                            <li className="flex items-start gap-2">
+                                <FaPhoneAlt className="mt-1 shrink-0 text-orquideaLilas-200" />
                                 <span>(33) 98438-5658</span>
                             </li>
-                            <li className="flex items-start">
-                                <i className="fas fa-envelope mt-1 mr-2 text-orquideaLilas-200"></i>
+                            <li className="flex items-start gap-2">
+                                <FaEnvelope className="mt-1 shrink-0 text-orquideaLilas-200" />
                                 <span>contato@curaintegral.com.br</span>
                             </li>
                         </ul>
