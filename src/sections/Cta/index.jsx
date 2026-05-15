@@ -50,7 +50,7 @@ const CTA = () => {
             },
             {
                 threshold: 0.1,
-                rootMargin: '100px 0px' 
+                rootMargin: '100px 0px'
             }
         );
 
@@ -76,7 +76,7 @@ const CTA = () => {
                 const tl = gsap.timeline({
                     defaults: {
                         ease: 'power2.out',
-                        duration: 0.8 
+                        duration: 0.8
                     }
                 });
 
@@ -137,7 +137,7 @@ const CTA = () => {
                     ref={headRef}
                     className="text-2xl md:text-3xl mb-6 font-serif italic font-bold text-white py-2 rounded-md"
                     style={{
-                        textShadow: '0 0 10px #8388f1, 0 0 20px #8388f1',
+                        textShadow: '0 0 10px #0411fc69, 0 0 20px #ffffffff',
                         opacity: isVisible ? undefined : 1
                     }}
                 >

@@ -1,6 +1,5 @@
 import { lazy, Suspense, useEffect, useState } from "react"
-import CTA from "./sections/Cta"
-import Navbar from "./sections/Navbar"
+import { Hero2 } from "./components/ui/hero-2-1"
 import BordaOndulada from "./components/BordaOndulada"
 import LoadingScreen from "./components/LoadingScreen"
 import { meusEventos } from "./constants/events"
@@ -49,8 +48,7 @@ const App = () => {
 
   return (
     <main className="relative min-h-screen w-screen overflow-x-hidden">
-      <Navbar />
-      <CTA />
+      <Hero2 />
       <Suspense fallback={<SectionFallback />}>
         <Numeros />
         <CarouselDemo />
