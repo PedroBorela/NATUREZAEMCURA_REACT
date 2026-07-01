@@ -1,18 +1,25 @@
 import { lazy, Suspense, useEffect, useState } from "react"
 import { Hero2 } from "./components/ui/hero-2-1"
-import BordaOndulada from "./components/BordaOndulada"
 import LoadingScreen from "./components/LoadingScreen"
 import { meusEventos } from "./constants/events"
 
-const Hero = lazy(() => import("./sections/Hero"))
-const CardHoverEffectDemo = lazy(() => import("./sections/Cards").then(m => ({ default: m.CardHoverEffectDemo })))
+const Dores = lazy(() => import("./sections/Dores"))
+const Encontrar = lazy(() => import("./sections/Encontrar"))
 const Numeros = lazy(() => import("./sections/Numeros"))
-const CarouselDemo = lazy(() => import("./components/CarouselDemo").then(m => ({ default: m.CarouselDemo })))
-const TimelineDemo = lazy(() => import("./components/TimelineDemo").then(m => ({ default: m.TimelineDemo })))
-const Footer = lazy(() => import("./sections/footer"))
-const VoltarPraCima = lazy(() => import("./components/voltarPraCima"))
+const Metodo = lazy(() => import("./sections/Metodo"))
+const Objetivos = lazy(() => import("./sections/Objetivos"))
+const ParaQuem = lazy(() => import("./sections/ParaQuem"))
+const Servicos = lazy(() => import("./sections/Servicos"))
+const Diferencial = lazy(() => import("./sections/Diferencial"))
+const Acolhimento = lazy(() => import("./sections/Acolhimento"))
 const InfiniteMovingCardsDemo = lazy(() => import("./components/Testimonial").then(m => ({ default: m.InfiniteMovingCardsDemo })))
 const Calendario = lazy(() => import("./sections/Calendario"))
+const Sobre = lazy(() => import("./sections/Hero"))
+const TimelineDemo = lazy(() => import("./components/TimelineDemo").then(m => ({ default: m.TimelineDemo })))
+const Faq = lazy(() => import("./sections/Faq"))
+const CtaFinal = lazy(() => import("./sections/CtaFinal"))
+const Footer = lazy(() => import("./sections/footer"))
+const VoltarPraCima = lazy(() => import("./components/voltarPraCima"))
 
 const SectionFallback = () => <div className="w-full h-48 bg-transparent" />
 
@@ -30,7 +37,7 @@ const App = () => {
     const timer = setTimeout(() => {
       minDelayDone = true;
       tryHide();
-    }, 800);
+    }, 600);
 
     if (document.readyState === "complete") {
       windowLoaded = true;
@@ -47,18 +54,24 @@ const App = () => {
   }
 
   return (
-    <main className="relative min-h-screen w-screen overflow-x-hidden">
+    <main className="relative min-h-screen w-full overflow-x-hidden bg-surface">
       <Hero2 />
       <Suspense fallback={<SectionFallback />}>
+        <Dores />
+        <Encontrar />
         <Numeros />
-        <CarouselDemo />
-        <BordaOndulada direcao="bottom" />
-        <CardHoverEffectDemo />
-        <BordaOndulada direcao="top" />
+        <Metodo />
+        <Objetivos />
+        <ParaQuem />
+        <Servicos />
+        <Diferencial />
+        <Acolhimento />
         <InfiniteMovingCardsDemo />
         <Calendario eventos={meusEventos} />
-        <Hero />
+        <Sobre />
         <TimelineDemo />
+        <Faq />
+        <CtaFinal />
         <VoltarPraCima />
         <Footer />
       </Suspense>

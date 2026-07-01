@@ -1,94 +1,46 @@
-import {
-    FaStar,
-} from "react-icons/fa";
 import CountUp from "../../blocks/TextAnimations/CountUp/CountUp";
-import ScrollVelocity from "../../blocks/TextAnimations/ScrollVelocity/ScrollVelocity";
-import { GiDiploma, GiMeditation } from "react-icons/gi";
-import { FaHandsPraying } from "react-icons/fa6";
-import { PiFlowerLotus } from "react-icons/pi";
-import { IoIosPeople } from "react-icons/io";
-import { MdEmojiPeople } from "react-icons/md";
-import { SiReasonstudios } from "react-icons/si";
+import { RevealGroup, RevealItem } from "../../components/motion/Reveal";
+import { GiMeditation } from "react-icons/gi";
+import { FaStar, FaHandsPraying, FaHouseChimney } from "react-icons/fa6";
+
+const stats = [
+    { Icon: GiMeditation, valor: 7, prefixo: "", sufixo: "", label: "Anos de Yoga e Meditação" },
+    { Icon: FaStar, valor: 2500, prefixo: "+", sufixo: "", label: "Pessoas atendidas" },
+    { Icon: FaHandsPraying, valor: 25, prefixo: "+", sufixo: "", label: "Encontros terapêuticos realizados" },
+    { Icon: FaHouseChimney, valor: 5, prefixo: "", sufixo: "", label: "Anos de estúdio próprio" },
+];
 
 const Numeros = () => {
     return (
-        <div className="bg-gradient-to-br from-green-800 via-green-700 to-green-400 to-90% drop-shadow-xl text-white py-20">
-            <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-8 text-center px-4">
-                {/* Item 1 */}
-                <div className="p-4">
-                    <div className="flex justify-center mb-2">
-                        <GiMeditation className="w-12 h-12 rotate-y-hover" />
-                    </div>
-                    <p className="text-4xl font-bold"><CountUp to={7} duration={1} /></p>
-                    <p className="text-xl sm:text-lg md:text-xl mt-1">Anos Professor de Yoga</p>
-                </div>
-
-                {/* Item 2 */}
-                <div className="p-4">
-                    <div className="flex justify-center mb-2">
-                        <FaStar className="w-12 h-12 rotate-y-hover" />
-                    </div>
-                    <p className="text-4xl font-bold">+<CountUp to={2500} duration={2} /></p>
-                    <p className="text-xl sm:text-lg md:text-xl mt-1">Alunos Atendidos</p>
-                </div>
-
-                {/* Item 3 */}
-                <div className="p-4">
-                    <div className="flex justify-center mb-2">
-                        <FaHandsPraying className="w-12 h-12 rotate-y-hover" />
-                    </div>
-                    <p className="text-4xl font-bold"><CountUp to={8} duration={3} /></p>
-                    <p className="text-xl sm:text-lg md:text-xl mt-1">Anos Terapeuta Reiki</p>
-                </div>
-
-                {/* Item 4 */}
-                <div className="p-4">
-                    <div className="flex justify-center mb-2">
-                        <PiFlowerLotus className="w-12 h-12 rotate-y-hover" />
-                    </div>
-                    <p className="text-4xl font-bold"><CountUp to={5} duration={4} /></p>
-                    <p className="text-xl sm:text-lg md:text-xl mt-1">Anos de Cerimônias Espirituais</p>
-                </div>
-
-                {/* Item 5 */}
-                <div className="p-4">
-                    <div className="flex justify-center mb-2">
-                        <IoIosPeople className="w-12 h-12 rotate-y-hover" />
-                    </div>
-                    <p className="text-4xl font-bold">+<CountUp to={25} duration={5} /></p>
-                    <p className="text-xl sm:text-lg md:text-xl mt-1">Encontros realizados</p>
-                </div>
-
-                {/* Item 6 */}
-                <div className="p-4">
-                    <div className="flex justify-center mb-2">
-                        <MdEmojiPeople className="w-12 h-12 rotate-y-hover" />
-                    </div>
-                    <p className="text-4xl font-bold">+<CountUp to={350} duration={6} /></p>
-                    <p className="text-xl sm:text-lg md:text-xl mt-1">Participantes</p>
-                </div>
-
-                {/* Item 7 */}
-                <div className="p-4">
-                    <div className="flex justify-center mb-2">
-                        <GiDiploma className="w-12 h-12 rotate-y-hover" />
-                    </div>
-                    <p className="text-4xl font-bold"><CountUp to={5} duration={7} /></p>
-                    <p className="text-xl sm:text-lg md:text-xl mt-1">Anos Mestre Reiki</p>
-                </div>
-
-                {/* Item 8 */}
-                <div className="p-4">
-                    <div className="flex justify-center mb-2">
-                        <SiReasonstudios className="w-12 h-12 rotate-y-hover" />
-                    </div>
-                    <p className="text-4xl font-bold"><CountUp to={5} duration={8} /></p>
-                    <p className="text-xl sm:text-lg md:text-xl mt-1">Anos com Estúdio Próprio</p>
-                </div>
-            </div>
-
-            {/* <ScrollVelocity className="text-orquideaLilas-200 relative text-shadow-lg/30 pt-5 z-10" texts={['#PazInterior #Meditação #SaúdeMental', '#TerapiaComplementar #SabedoriaAncestral']}  /> */}
-        </div>
+        <section className="relative overflow-hidden bg-gradient-to-br from-primary-dark via-primary to-[#4d7a14] py-16 text-white sm:py-20">
+            <div
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-0 opacity-20"
+                style={{
+                    backgroundImage:
+                        "radial-gradient(circle at 20% 20%, rgba(188,240,116,0.35) 0, transparent 45%), radial-gradient(circle at 80% 70%, rgba(172,98,234,0.25) 0, transparent 40%)",
+                }}
+            />
+            <RevealGroup
+                stagger={0.12}
+                className="section-shell relative grid grid-cols-2 gap-8 text-center lg:grid-cols-4"
+            >
+                {stats.map(({ Icon, valor, prefixo, label }, i) => (
+                    <RevealItem key={label}>
+                        <div className="group flex flex-col items-center p-2 sm:p-4">
+                            <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white/10 ring-1 ring-white/15 transition-transform duration-300 group-hover:scale-110">
+                                <Icon className="h-7 w-7 text-primary-fixed" />
+                            </span>
+                            <p className="mt-4 font-display text-4xl font-semibold sm:text-5xl">
+                                {prefixo}
+                                <CountUp to={valor} duration={1.5 + i * 0.4} />
+                            </p>
+                            <p className="mt-1.5 text-sm font-medium text-white/80 sm:text-base">{label}</p>
+                        </div>
+                    </RevealItem>
+                ))}
+            </RevealGroup>
+        </section>
     );
 };
 

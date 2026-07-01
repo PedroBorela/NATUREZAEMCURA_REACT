@@ -216,10 +216,19 @@ const Calendario = ({ eventos = [] }) => {
     }, [expandedEvent, closeModal]);
 
     return (
-        <div className="w-full bg-gradient-to-br from-orquideaLilas-100 to-azulArpoador-100 py-12">
-            <h2 className="text-3xl md:text-5xl font-bold text-azulArpoador-300 mb-8 text-center drop-shadow-md z-10">
-                Nossos próximos eventos
-            </h2>
+        <div id="agenda" className="w-full bg-gradient-to-br from-surface-container to-tertiary-fixed/40 py-16 sm:py-20">
+            <div className="mb-10 flex flex-col items-center gap-4 px-5 text-center">
+                <span className="inline-flex items-center gap-2 rounded-full bg-tertiary-fixed/70 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-tertiary ring-1 ring-tertiary-container/50">
+                    <span className="h-1.5 w-1.5 rounded-full bg-tertiary" />
+                    Agenda
+                </span>
+                <h2 className="font-display text-3xl font-semibold text-ink md:text-4xl">
+                    Nossos próximos eventos
+                </h2>
+                <p className="max-w-2xl text-base text-ink-soft sm:text-lg">
+                    Aulas, encontros terapêuticos e vivências — acompanhe as datas e garanta sua presença.
+                </p>
+            </div>
             <div className="flex flex-col lg:flex-row gap-8 p-6 w-auto max-w-7xl mx-auto ">
                 {/* Coluna do Calendário */}
                 <div className="lg:w-1/2 w-full">

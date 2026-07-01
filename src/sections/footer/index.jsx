@@ -1,70 +1,122 @@
-import { FaInstagram, FaFacebookF, FaYoutube, FaMapMarkerAlt, FaPhoneAlt, FaEnvelope } from "react-icons/fa";
+import { FaInstagram, FaFacebookF, FaYoutube, FaMapMarkerAlt, FaPhoneAlt, FaEnvelope, FaWhatsapp } from "react-icons/fa";
+import { navLinks } from "../../constants";
+import { WHATSAPP_URL } from "../../constants/copy";
+
+const servicosFooter = [
+    "Yoga e Meditação",
+    "Atendimento Psicológico — ACT",
+    "Atendimento Domiciliar",
+    "Encontros Terapêuticos",
+    "Cursos e Produtos Digitais",
+];
 
 const Footer = () => {
     return (
-        <footer className=" bg-gradient-to-br from-green-500 via-green-700 to-green-500 to-90% text-slate-200 py-12">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-                    <div className="md:col-span-2">
-                        <h3 className="text-2xl font-bold mb-4"><span className="text-verdeEsmeralda-500">Natureza</span><span className="text-orquideaLilas">emCura</span></h3>
-                        <p className="mb-4">Integrando psicologia moderna e sabedoria ancestral para promover cura profunda e
-                            transformação pessoal.</p>
-                        <div className="flex space-x-4">
-                            <a href="https://www.instagram.com/naturezaemcura/"
-                                className="bg-white bg-opacity-10 p-3 rounded-full hover:bg-opacity-20 transition duration-300"
-                                aria-label="Instagram">
-                                <FaInstagram />
-                            </a>
-                            <a href="https://www.facebook.com/naturezaemcura"
-                                className="bg-white bg-opacity-10 p-3 rounded-full hover:bg-opacity-20 transition duration-300"
-                                aria-label="Facebook">
-                                <FaFacebookF />
-                            </a>
-                            <a href="https://www.youtube.com/@Natureza_em_Cura"
-                                className="bg-white bg-opacity-10 p-3 rounded-full hover:bg-opacity-20 transition duration-300"
-                                aria-label="YouTube">
-                                <FaYoutube />
-                            </a>
+        <footer className="bg-surface-inverse text-white/80">
+            <div className="section-shell py-14 sm:py-16">
+                <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-4 lg:gap-8">
+                    {/* Marca */}
+                    <div className="lg:pr-6">
+                        <div className="flex items-center gap-3">
+                            <img
+                                src="/imgs/logoICone.png"
+                                alt="Logo Natureza em Cura"
+                                className="h-11 w-11 rounded-full object-contain"
+                                loading="lazy"
+                            />
+                            <h3 className="font-display text-xl font-semibold text-white">
+                                Natureza em Cura
+                            </h3>
+                        </div>
+                        <p className="mt-4 text-sm leading-relaxed">
+                            Yoga, Meditação, Psicologia e Terapias Integrativas para transformar sua saúde
+                            mental, emocional e qualidade de vida.
+                        </p>
+                        <div className="mt-5 flex gap-3">
+                            {[
+                                { href: "https://www.instagram.com/naturezaemcura/", Icon: FaInstagram, label: "Instagram" },
+                                { href: "https://www.facebook.com/naturezaemcura", Icon: FaFacebookF, label: "Facebook" },
+                                { href: "https://www.youtube.com/@Natureza_em_Cura", Icon: FaYoutube, label: "YouTube" },
+                                { href: WHATSAPP_URL, Icon: FaWhatsapp, label: "WhatsApp" },
+                            ].map(({ href, Icon, label }) => (
+                                <a
+                                    key={label}
+                                    href={href}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    aria-label={label}
+                                    className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary-container hover:text-primary-onContainer"
+                                >
+                                    <Icon className="h-4 w-4" />
+                                </a>
+                            ))}
                         </div>
                     </div>
 
+                    {/* Links rápidos */}
                     <div>
-                        <h4 className="font-bold text-lg mb-4">Links Rápidos</h4>
-                        <ul className="space-y-2">
-                            <li><a href="#home" className="hover:text-orquideaLilas-200 transition duration-300">Início</a></li>
-                            <li><a href="#about" className="hover:text-orquideaLilas-200 transition duration-300">Sobre</a></li>
-                            <li><a href="#services" className="hover:text-orquideaLilas-200 transition duration-300">Serviços</a></li>
-                            <li><a href="#testimonials" className="hover:text-orquideaLilas-200 transition duration-300">Depoimentos</a></li>
-                            <li><a href="#contact" className="hover:text-orquideaLilas-200 transition duration-300">Contato</a></li>
+                        <h4 className="font-display text-lg font-semibold text-white">Links Rápidos</h4>
+                        <ul className="mt-4 space-y-2.5 text-sm">
+                            {navLinks.map((link) => (
+                                <li key={link.id}>
+                                    <a
+                                        href={link.href}
+                                        className="transition-colors duration-300 hover:text-primary-fixed"
+                                    >
+                                        {link.name}
+                                    </a>
+                                </li>
+                            ))}
                         </ul>
                     </div>
 
+                    {/* Serviços */}
                     <div>
-                        <h4 className="font-bold text-lg mb-4">Contato</h4>
-                        <ul className="space-y-2">
-                            <li className="flex items-start gap-2">
-                                <FaMapMarkerAlt className="mt-1 shrink-0 text-orquideaLilas-200" />
-                                <span>Rua da Conceição, 170 - MG</span>
+                        <h4 className="font-display text-lg font-semibold text-white">Serviços</h4>
+                        <ul className="mt-4 space-y-2.5 text-sm">
+                            {servicosFooter.map((s) => (
+                                <li key={s} className="flex items-start gap-2">
+                                    <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary-container" />
+                                    {s}
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+
+                    {/* Contato */}
+                    <div>
+                        <h4 className="font-display text-lg font-semibold text-white">Contato</h4>
+                        <ul className="mt-4 space-y-3 text-sm">
+                            <li className="flex items-start gap-2.5">
+                                <FaMapMarkerAlt className="mt-0.5 shrink-0 text-primary-container" />
+                                <span>Rua da Conceição, 170 — Manhuaçu, MG</span>
                             </li>
-                            <li className="flex items-start gap-2">
-                                <FaPhoneAlt className="mt-1 shrink-0 text-orquideaLilas-200" />
-                                <span>(33) 98438-5658</span>
+                            <li className="flex items-start gap-2.5">
+                                <FaPhoneAlt className="mt-0.5 shrink-0 text-primary-container" />
+                                <a href="tel:+5533984385658" className="transition-colors hover:text-primary-fixed">
+                                    (33) 98438-5658
+                                </a>
                             </li>
-                            <li className="flex items-start gap-2">
-                                <FaEnvelope className="mt-1 shrink-0 text-orquideaLilas-200" />
-                                <span>contato@curaintegral.com.br</span>
+                            <li className="flex items-start gap-2.5">
+                                <FaEnvelope className="mt-0.5 shrink-0 text-primary-container" />
+                                <a
+                                    href="mailto:contato@curaintegral.com.br"
+                                    className="break-all transition-colors hover:text-primary-fixed"
+                                >
+                                    contato@curaintegral.com.br
+                                </a>
                             </li>
                         </ul>
                     </div>
                 </div>
 
-                <div className="border-t border-[#A9B388] border-opacity-30 mt-12 pt-8 text-center text-sm">
-                    <p>&copy; 2025 Natureza em Cura. Todos os direitos reservados.</p>
+                <div className="mt-12 border-t border-white/10 pt-8 text-center text-xs text-white/60">
+                    <p>&copy; {new Date().getFullYear()} Natureza em Cura. Todos os direitos reservados.</p>
                     <p className="mt-2">Desenvolvido por Pedro Borela</p>
                 </div>
             </div>
         </footer>
-    )
-}
+    );
+};
 
 export default Footer;

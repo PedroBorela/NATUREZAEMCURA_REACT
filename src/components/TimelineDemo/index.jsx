@@ -1,4 +1,4 @@
-import React from "react";
+﻿import React from "react";
 import { Timeline } from "@/components/ui/timeline";
 import { motion } from "framer-motion";
 
@@ -18,7 +18,7 @@ export function TimelineDemo() {
             title: "Raízes da Cura",
             content: (
               <motion.div {...fadeInUp}>
-                <p className="mb-8 text-xl font-normal text-neutral-800 md:text-2xl dark:text-neutral-200">
+                <p className="mb-8 text-base font-normal leading-relaxed text-ink-soft md:text-lg">
                   A Natureza em Cura nasceu do encontro entre a Psicologia e o
                   Yoga. Tudo começou com aulas gratuitas em postos de saúde e
                   espaços comunitários, quando percebemos que o corpo, a mente e
@@ -70,7 +70,7 @@ export function TimelineDemo() {
             title: "Consolidação e Propósito",
             content: (
               <motion.div {...fadeInUp}>
-                <p className="mb-8 text-xl font-normal text-neutral-800 md:text-2xl dark:text-neutral-200">
+                <p className="mb-8 text-base font-normal leading-relaxed text-ink-soft md:text-lg">
                   Nosso espaço próprio foi criado em meio a desafios — um pequeno
                   estúdio nos fundos da casa da avó se transformou em um templo de
                   transformação. Começamos a atender mais de 100 pessoas por
@@ -122,7 +122,7 @@ export function TimelineDemo() {
             title: "A Essência da Natureza em Cura",
             content: (
               <motion.div {...fadeInUp}>
-                <p className="mb-4 text-xl font-normal text-neutral-800 md:text-2xl dark:text-neutral-200">
+                <p className="mb-4 text-base font-normal leading-relaxed text-ink-soft md:text-lg">
                   A Natureza em Cura é um ponto de encontro entre ciência,
                   espiritualidade e prática. Mais do que um espaço físico, ela se
                   tornou um movimento que acolhe, ensina e transforma. Cada curso,
@@ -139,7 +139,7 @@ export function TimelineDemo() {
                   ].map((text, i) => (
                     <motion.div
                       key={i}
-                      className="flex items-center gap-2 text-lg text-white md:text-lg dark:text-neutral-300"
+                      className="flex items-center gap-2 text-base text-ink-soft md:text-lg"
                       initial={{ opacity: 0, x: -20 }}
                       whileInView={{ opacity: 1, x: 0 }}
                       transition={{ delay: i * 0.15, duration: 0.8 }}

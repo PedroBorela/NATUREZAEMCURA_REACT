@@ -6,31 +6,29 @@ export const navLinks = [
     },
     {
         id: 2,
-        name: 'Serviços',
-        href: '#servicos',
+        name: 'Método',
+        href: '#metodo',
     },
     {
         id: 3,
-        name: 'Trajetória',
-        href: '#trajetoria',
-    },
-    {
-        id: 6,
-        name: 'Benefícios',
-        href: '#beneficios',
-    },
-    {
-        id: 5,
-        name: 'Sobre',
-        href: '#sobre',
+        name: 'Serviços',
+        href: '#servicos',
     },
     {
         id: 4,
         name: 'Depoimentos',
         href: '#depoimentos',
     },
-    
-
+    {
+        id: 5,
+        name: 'Agenda',
+        href: '#agenda',
+    },
+    {
+        id: 6,
+        name: 'Sobre',
+        href: '#sobre',
+    },
     {
         id: 7,
         name: 'Contato',

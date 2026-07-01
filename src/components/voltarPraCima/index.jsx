@@ -39,7 +39,7 @@ const VoltarPraCima = () => {
         <button
             ref={buttonRef}
             id="backToTop"
-            className="fixed bottom-8 right-8 bg-gradient-to-br from-azulArpoador-100 to-azulArpoador-300 text-white p-3 rounded-full shadow-lg opacity-0 invisible transition-all duration-300 z-50"
+            className="fixed bottom-8 right-8 z-50 rounded-full bg-primary p-3.5 text-white shadow-ambient-lg opacity-0 invisible transition-all duration-300 hover:-translate-y-1 hover:bg-primary-dark"
             aria-label="Voltar ao topo"
         >
             <FaArrowUp />

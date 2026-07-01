@@ -2,36 +2,72 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-    overflow-x: hidden;
-}
-
-h1,
-h2,
-h3,
-h4 {
-    font-family: 'Playfair Display', serif;
-}
-::selection {
-  background-color: var(--orquideaLilas); /* cor de fundo ao selecionar */
-  color: white;              /* cor do texto selecionado */
-}
-
 :root {
     --accent: #B99470;
     --rosa: #ac62ea;
     --orquideaLilas: #8388f1;
     --VerdeEsmeralda: #9dcd5a;
     --azulArpoador: #4191cf;
+    --primary: #3c6a00;
+    --surface: #f8fbf0;
 }
 
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+}
+
+body {
+    overflow-x: hidden;
+    background-color: var(--surface);
+    color: #191d16;
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    font-family: 'Literata', Georgia, serif;
+}
+
+::selection {
+    background-color: var(--primary);
+    color: white;
+}
+
+body::-webkit-scrollbar {
+    width: 8px;
+}
+
+body::-webkit-scrollbar-track {
+    background: #eef2e5;
+}
+
+body::-webkit-scrollbar-thumb {
+    background-image: linear-gradient(180deg, var(--VerdeEsmeralda), var(--primary));
+    border-radius: 50px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
 
 @layer utilities {
     .nav-ul {
         @apply flex flex-col items-center gap-4 sm:flex-row md:gap-6 relative z-20;
     }
-
-
 
     .nav-li_a {
         @apply hover:text-[#B99470] px-3 py-2 rounded-md font-medium;
@@ -48,5 +84,14 @@ h4 {
 
     .rotate-y-hover:hover {
         transform: rotateY(360deg);
+    }
+
+    /* Container padrão das seções (margens generosas do design system) */
+    .section-shell {
+        @apply mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-12;
+    }
+
+    .section-pad {
+        @apply py-16 sm:py-20 lg:py-28;
     }
 }

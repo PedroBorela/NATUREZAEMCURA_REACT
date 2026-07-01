@@ -1,112 +1,102 @@
-import { useEffect, useRef } from "react";
-import Bullet from "../../components/Bullet.jsx";
+import { sobre } from "../../constants/copy";
+import SectionHeading from "../../components/SectionHeading";
+import Reveal, { RevealGroup, RevealItem } from "../../components/motion/Reveal";
 import SpotlightCard from "../../components/SpotlightCard/SpotlightCard";
 import { FaLeaf, FaGraduationCap } from "react-icons/fa";
 
-const Hero = () => {
-  const sectionRef = useRef(null);
-
-  useEffect(() => {
-    const el = sectionRef.current;
-    if (!el) return;
-
-    const observer = new IntersectionObserver(
-      async ([entry]) => {
-        if (!entry.isIntersecting) return;
-        observer.disconnect();
-
-        const [{ default: gsap }, { ScrollTrigger }] = await Promise.all([
-          import("gsap"),
-          import("gsap/ScrollTrigger"),
-        ]);
-        gsap.registerPlugin(ScrollTrigger);
-
-        const ctx = gsap.context(() => {
-          const animationDefaults = { opacity: 0, duration: 1, ease: "power3.out" };
-
-          gsap.timeline({
-            scrollTrigger: {
-              trigger: el,
-              start: "top 80%",
-              toggleActions: "play none none none",
-            },
-          })
-            .from(".hero-img", { ...animationDefaults, x: -50 })
-            .from(".hero-title", { ...animationDefaults, y: 40 }, "-=0.8")
-            .from(".hero-paragraph", { ...animationDefaults, y: 30, stagger: 0.2 }, "-=0.7")
-            .from(".hero-bullet", { ...animationDefaults, y: 30 }, "-=0.6")
-            .from(".selector", { ...animationDefaults, scale: 0.95, duration: 2 }, "-=1");
-        }, el);
-
-        return () => ctx.revert();
-      },
-      { threshold: 0.1 }
-    );
-
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
-
+// Seção "Sobre" — apresenta o Natureza em Cura e Allan Borela
+const Sobre = () => {
   return (
-    <section
-      id="sobre"
-      ref={sectionRef}
-      className="py-12 lg:py-20 min-h-36 bg-green-800 bg-cover bg-center relative overflow-hidden"
-    >
-      <div className="max-w-7xl mx-auto py-6 lg:py-10 px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-10 lg:mb-16">
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-4">
-            Curar é Relembrar <span className="text-verdeEsmeralda-200">Quem Somos</span>
-          </h1>
-          <p className="text-lg lg:text-xl text-white opacity-90 max-w-3xl mx-auto">
-            Unindo psicologia clínica e saberes ancestrais para transformar vidas com propósito
-          </p>
-        </div>
+    <section id="sobre" className="relative overflow-hidden bg-surface section-pad">
+      <div className="section-shell">
+        <SectionHeading
+          eyebrow="Quem somos"
+          title={sobre.title}
+          subtitle="Mais do que um serviço, um caminho de transformação interior."
+        />
 
-        <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-0">
-          <div className="w-full lg:w-1/2 lg:pr-10">
+        <RevealGroup stagger={0.12} className="mx-auto mt-10 flex max-w-3xl flex-col gap-5 text-center">
+          {sobre.paragrafos.map((p) => (
+            <RevealItem key={p.slice(0, 24)}>
+              <p className="text-base leading-relaxed text-ink-soft sm:text-lg">{p}</p>
+            </RevealItem>
+          ))}
+        </RevealGroup>
+
+        {/* Allan Borela */}
+        <div className="mt-20 flex flex-col items-center gap-10 lg:flex-row lg:gap-16">
+          <Reveal className="w-full lg:w-5/12">
             <SpotlightCard className="z-10">
               <img
                 src="./imgs/allanb.jpg"
                 alt="Allan Borela"
-                className="hero-img rounded-lg w-full h-auto max-h-[400px] lg:max-h-[500px] object-cover"
+                className="w-full rounded-2xl object-cover object-top lg:max-h-[520px]"
                 loading="lazy"
                 decoding="async"
               />
             </SpotlightCard>
-          </div>
+          </Reveal>
 
-          <div className="w-full lg:w-1/2 z-10 mt-6 lg:mt-0 lg:pl-10">
-            <h2 className="hero-title text-3xl lg:text-4xl font-bold mb-4 lg:mb-6 text-white">
-              Allan Borela
-            </h2>
+          <div className="w-full lg:w-7/12">
+            <Reveal>
+              <span className="inline-flex items-center gap-2 rounded-full bg-secondary-fixed/60 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-secondary-dark ring-1 ring-secondary-container/40">
+                <span className="h-1.5 w-1.5 rounded-full bg-secondary" />
+                Fundador
+              </span>
+            </Reveal>
 
-            <p className="hero-paragraph text-base lg:text-lg mb-4 lg:mb-6 font-bold text-white">
-              Psicólogo clínico com pós-graduação em Terapias de Terceira e Quarta Geração e uma trajetória marcada pela união entre ciência moderna e saberes ancestrais. Atua há mais de uma década com <span className="text-verdeEsmeralda-200">yoga, meditação e práticas integrativas</span>, promovendo saúde em <span className="text-verdeEsmeralda-200">níveis físico, emocional, mental, energético e espiritual</span>.
-            </p>
+            <Reveal delay={0.08}>
+              <h3 className="mt-4 font-display text-3xl font-semibold text-ink lg:text-4xl">
+                Allan Borela
+              </h3>
+            </Reveal>
 
-            <p className="hero-paragraph text-base lg:text-lg mb-6 lg:mb-8 font-bold text-white">
-              "Minha jornada começou no SUS, levando yoga e meditação para centenas de pessoas em postos de saúde e CAPS. Com o tempo, compreendi que a verdadeira cura exige olhar o ser humano como um todo. Hoje, dedico minha vida à <span className="text-verdeEsmeralda-200">formação de terapeutas conscientes</span> e ao desenvolvimento de <span className="text-verdeEsmeralda-200">programas de equilíbrio emocional</span> profundamente enraizados na natureza e na alma."
-            </p>
+            <Reveal delay={0.16}>
+              <p className="mt-5 text-base leading-relaxed text-ink-soft lg:text-lg">
+                Psicólogo clínico com pós-graduação em Terapias de Terceira e Quarta Geração e uma
+                trajetória marcada pela união entre ciência moderna e saberes ancestrais. Atua há mais
+                de uma década com{" "}
+                <span className="font-semibold text-primary">yoga, meditação e práticas integrativas</span>,
+                promovendo saúde em{" "}
+                <span className="font-semibold text-primary">
+                  níveis físico, emocional, mental, energético e espiritual
+                </span>.
+              </p>
+            </Reveal>
 
-            <div className="hero-bullet flex flex-wrap gap-3 lg:gap-4">
-              <Bullet icon={<FaGraduationCap />} />
-              <Bullet
-                titulo="Diferencial"
-                texto="Ciência e Sabedoria Ancestral em União"
-                icon={<FaLeaf />}
-                corTitulo="#5F6F52"
-                corFundo="#A9B388"
-              />
-            </div>
+            <Reveal delay={0.24}>
+              <blockquote className="mt-6 rounded-2xl border-l-4 border-primary-container bg-surface-low p-6 text-base italic leading-relaxed text-ink-soft shadow-ambient lg:text-lg">
+                "Minha jornada começou no SUS, levando yoga e meditação para centenas de pessoas em
+                postos de saúde e CAPS. Com o tempo, compreendi que a verdadeira cura exige olhar o
+                ser humano como um todo. Hoje, dedico minha vida à formação de terapeutas conscientes
+                e ao desenvolvimento de programas de equilíbrio emocional profundamente enraizados na
+                natureza e na alma."
+              </blockquote>
+            </Reveal>
+
+            <RevealGroup stagger={0.1} delay={0.2} className="mt-7 flex flex-wrap gap-3">
+              <RevealItem>
+                <span className="inline-flex items-center gap-2.5 rounded-full bg-primary-container/30 px-5 py-2.5 text-sm font-semibold text-primary-dark">
+                  <FaGraduationCap className="h-4 w-4" />
+                  Psicólogo Clínico — ACT
+                </span>
+              </RevealItem>
+              <RevealItem>
+                <span className="inline-flex items-center gap-2.5 rounded-full bg-secondary-fixed/60 px-5 py-2.5 text-sm font-semibold text-secondary-dark">
+                  <FaLeaf className="h-4 w-4" />
+                  Ciência e Sabedoria Ancestral em União
+                </span>
+              </RevealItem>
+            </RevealGroup>
           </div>
         </div>
       </div>
 
       <img
-        className="selector w-[800px] lg:w-[1250px] h-auto absolute z-0 -bottom-20 lg:-top-20 lg:bottom-0 opacity-20 right-0 pointer-events-none"
+        className="pointer-events-none absolute -bottom-24 -right-24 w-[560px] opacity-[0.07]"
         src="/imgs/mandala.webp"
         alt=""
+        aria-hidden="true"
         loading="lazy"
         decoding="async"
       />
@@ -114,4 +104,4 @@ const Hero = () => {
   );
 };
 
-export default Hero;
+export default Sobre;
