@@ -1,10 +1,73 @@
+import { useEffect, useRef, useState } from "react";
+import { useReducedMotion } from "motion/react";
 import { acolhimento, WHATSAPP_URL } from "../../constants/copy";
 import Reveal from "../../components/motion/Reveal";
 import { ArrowRight } from "lucide-react";
 
 const Acolhimento = () => {
+    const sectionRef = useRef(null);
+    const videoRef = useRef(null);
+    const [showVideo, setShowVideo] = useState(false);
+    const reduce = useReducedMotion();
+
+    // Só injeta o vídeo (6MB) quando a seção se aproxima do viewport
+    useEffect(() => {
+        if (reduce) return;
+        const el = sectionRef.current;
+        if (!el) return;
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    setShowVideo(true);
+                    observer.disconnect();
+                }
+            },
+            { rootMargin: "400px" }
+        );
+        observer.observe(el);
+        return () => observer.disconnect();
+    }, [reduce]);
+
+    // Pausa a reprodução quando a seção sai da tela
+    useEffect(() => {
+        if (!showVideo) return;
+        const vid = videoRef.current;
+        if (!vid) return;
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    vid.play().catch(() => {});
+                } else {
+                    vid.pause();
+                }
+            },
+            { threshold: 0.1 }
+        );
+        observer.observe(vid);
+        return () => observer.disconnect();
+    }, [showVideo]);
+
     return (
-        <section className="relative overflow-hidden bg-surface-inverse py-20 sm:py-24">
+        <section ref={sectionRef} className="relative overflow-hidden bg-surface-inverse py-20 sm:py-24">
+            {/* Vídeo de fundo com overlay escuro para legibilidade */}
+            {showVideo && (
+                <video
+                    ref={videoRef}
+                    className="absolute inset-0 h-full w-full object-cover opacity-30"
+                    src="/imgs/video_fundo.mp4"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    preload="none"
+                    aria-hidden="true"
+                />
+            )}
+            <div
+                aria-hidden="true"
+                className="absolute inset-0 bg-gradient-to-b from-surface-inverse/80 via-surface-inverse/60 to-surface-inverse/80"
+            />
+
             <div
                 aria-hidden="true"
                 className="pointer-events-none absolute inset-0"
