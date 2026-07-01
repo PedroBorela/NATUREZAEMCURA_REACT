@@ -93,7 +93,7 @@ const Sobre = () => {
       </div>
 
       <img
-        className="pointer-events-none absolute -bottom-24 -right-24 w-[560px] opacity-[0.07]"
+        className="pointer-events-none absolute -top-40 -left-40 w-[800px] max-w-none opacity-[0.07]"
         src="/imgs/mandala.webp"
         alt=""
         aria-hidden="true"
