@@ -24,6 +24,7 @@ const VoltarPraCima = lazy(() => import("./components/voltarPraCima"))
 const SectionFallback = () => <div className="w-full h-48 bg-transparent" />
 
 const App = () => {
+  // v2.0: Redesign com nova copy, depoimentos arrastaveis, video de fundo
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
