@@ -1,0 +1,46 @@
+/* Estilos globais da landing antiga (v1), carregados só em ?v=1 */
+html {
+    scroll-behavior: smooth;
+    overflow-x: hidden !important;
+    font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+body {
+    overflow-x: hidden;
+    background: #fff;
+    color: #000;
+    font-family: inherit;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    font-family: 'Playfair Display', serif;
+}
+
+::selection {
+    background-color: var(--orquideaLilas);
+    color: white;
+}
+
+:root {
+    --accent: #B99470;
+    --rosa: #ac62ea;
+    --orquideaLilas: #8388f1;
+    --VerdeEsmeralda: #9dcd5a;
+    --azulArpoador: #4191cf;
+}
+
+body::-webkit-scrollbar {
+    width: 8px;
+}
+
+body::-webkit-scrollbar-track {
+    background: #171717;
+}
+
+body::-webkit-scrollbar-thumb {
+    background-image: linear-gradient(180deg, var(--orquideaLilas), var(--azulArpoador), var(--VerdeEsmeralda));
+    border-radius: 50px;
+}

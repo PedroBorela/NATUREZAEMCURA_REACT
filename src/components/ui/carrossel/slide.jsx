@@ -1,5 +1,5 @@
 "use client";
-import { useState, useRef, useId, useEffect, useCallback, memo, Suspense } from "react";
+import { useRef, memo, Suspense } from "react";
 
 const Slide = memo(({ slide, index, current, handleSlideClick }) => {
     const { src, button, title } = slide;

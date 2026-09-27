@@ -15,7 +15,7 @@ export default defineConfig({
         manualChunks: {
           'vendor-react': ['react', 'react-dom'],
           'vendor-motion': ['framer-motion', 'motion'],
-          'vendor-gsap': ['gsap'],
+          'vendor-gsap': ['gsap', '@gsap/react', 'lenis'],
           'vendor-icons': ['react-icons'],
           'vendor-dates': ['date-fns'],
         },

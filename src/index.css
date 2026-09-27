@@ -2,36 +2,55 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-    overflow-x: hidden;
+@layer base {
+    /* Lenis */
+    html.lenis,
+    html.lenis body {
+        height: auto;
+    }
+
+    .lenis.lenis-smooth {
+        scroll-behavior: auto !important;
+    }
+
+    .lenis.lenis-stopped {
+        overflow: clip;
+    }
+
+    body {
+        margin: 0;
+        background: theme('colors.lavanda.bg');
+        /* clip (e não hidden) para não quebrar position: sticky */
+        overflow-x: clip;
+        font-family: theme('fontFamily.sans');
+        color: theme('colors.texto');
+        -webkit-font-smoothing: antialiased;
+    }
+
+    img {
+        display: block;
+    }
+
+    ::selection {
+        background: theme('colors.lavanda.500');
+        color: #fff;
+    }
+
+    button {
+        font-family: inherit;
+    }
+
+    :focus-visible {
+        outline: 2px solid theme('colors.lavanda.600');
+        outline-offset: 3px;
+    }
 }
 
-h1,
-h2,
-h3,
-h4 {
-    font-family: 'Playfair Display', serif;
-}
-::selection {
-  background-color: var(--orquideaLilas); /* cor de fundo ao selecionar */
-  color: white;              /* cor do texto selecionado */
-}
-
-:root {
-    --accent: #B99470;
-    --rosa: #ac62ea;
-    --orquideaLilas: #8388f1;
-    --VerdeEsmeralda: #9dcd5a;
-    --azulArpoador: #4191cf;
-}
-
-
+/* Utilitários usados pela landing antiga (v1) */
 @layer utilities {
     .nav-ul {
         @apply flex flex-col items-center gap-4 sm:flex-row md:gap-6 relative z-20;
     }
-
-
 
     .nav-li_a {
         @apply hover:text-[#B99470] px-3 py-2 rounded-md font-medium;
