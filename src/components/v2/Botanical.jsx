@@ -1,9 +1,10 @@
 import { cn } from "@/lib/utils"
 
+// Dimensões do viewBox de cada SVG (width/height evitam layout shift)
 const SRC = {
-  sprig: "/assets/sprig.svg",
-  fern: "/assets/fern.svg",
-  lavender: "/assets/lavender.svg",
+  sprig: { src: "/assets/sprig.svg", w: 320, h: 320 },
+  fern: { src: "/assets/fern.svg", w: 220, h: 380 },
+  lavender: { src: "/assets/lavender.svg", w: 120, h: 320 },
 }
 
 /*
@@ -16,11 +17,13 @@ export default function Botanical({ name, className, imgClassName, sway = true, 
     <div aria-hidden className={cn("pointer-events-none absolute", className)} {...props}>
       <img
         {...(sway ? { "data-sway": "" } : null)}
-        src={SRC[name]}
+        src={SRC[name].src}
+        width={SRC[name].w}
+        height={SRC[name].h}
         alt=""
         loading={eager ? "eager" : "lazy"}
         decoding="async"
-        className={cn("w-full", imgClassName)}
+        className={cn("h-auto w-full", imgClassName)}
       />
     </div>
   )

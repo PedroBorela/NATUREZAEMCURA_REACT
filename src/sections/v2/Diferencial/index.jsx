@@ -1,5 +1,5 @@
 import { useRef } from "react"
-import { gsap, useGSAP } from "@/lib/gsap"
+import { gsap, pauseOffscreen, useGSAP } from "@/lib/gsap"
 import { cn } from "@/lib/utils"
 import { useAmbient } from "@/hooks/useAmbient"
 import { useReducedMotion } from "@/hooks/useReducedMotion"
@@ -33,8 +33,11 @@ export default function Diferencial() {
   useGSAP(
     () => {
       if (reduce) return
-      gsap.to("[data-orbit]", { rotation: 360, duration: 70, repeat: -1, ease: "none" })
-      gsap.to("[data-orbit-chip]", { rotation: -360, duration: 70, repeat: -1, ease: "none" })
+      const orbit = ref.current.querySelector("[data-orbit]")
+      pauseOffscreen(orbit, [
+        gsap.to(orbit, { rotation: 360, duration: 70, repeat: -1, ease: "none" }),
+        gsap.to("[data-orbit-chip]", { rotation: -360, duration: 70, repeat: -1, ease: "none" }),
+      ])
     },
     { scope: ref, dependencies: [reduce], revertOnUpdate: true },
   )
@@ -103,7 +106,7 @@ export default function Diferencial() {
         <div className="relative mt-[90px] overflow-hidden rounded-[40px] border border-white/90 bg-gradient-to-br from-verde-50 to-lavanda-75 p-[clamp(28px,5vw,64px)] shadow-[0_40px_80px_-60px_rgba(42,27,94,.45)]">
           <img
             data-spin="120"
-            src="/imgs/mandala-900.webp"
+            src="/imgs/mandala-700.webp"
             alt=""
             loading="lazy"
             decoding="async"

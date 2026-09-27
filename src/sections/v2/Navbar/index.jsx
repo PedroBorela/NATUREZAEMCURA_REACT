@@ -37,7 +37,7 @@ export default function Navbar() {
     <>
       <header ref={header} className="fixed inset-x-0 top-3.5 z-[900] px-[clamp(12px,3vw,32px)]">
         <div className="mx-auto flex h-[70px] max-w-[1240px] items-center justify-between gap-4 rounded-full border border-white/80 bg-white/[.62] pl-3.5 pr-2.5 shadow-[inset_0_1px_0_rgba(255,255,255,.9),0_18px_40px_-24px_rgba(76,52,160,.35)] backdrop-blur-[18px] backdrop-saturate-[1.6]">
-          <a href="#inicio" className="flex items-center gap-2.5 text-ink" aria-label={`${BRAND.name} — início`}>
+          <a href="#inicio" className="flex items-center gap-2.5 text-ink">
             <img src={BRAND.logoSmall} alt="" width="48" height="48" className="size-12 object-contain" />
             <span className="flex flex-col leading-none">
               <span className="font-serif text-[19px] text-ink">{BRAND.name}</span>

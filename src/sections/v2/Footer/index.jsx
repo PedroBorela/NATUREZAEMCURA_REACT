@@ -111,7 +111,7 @@ export default function Footer() {
       <div data-blob="" aria-hidden className="pointer-events-none absolute -right-[10%] -top-[30%] size-[560px] rounded-full bg-[radial-gradient(circle,rgba(140,108,230,.28),rgba(140,108,230,0)_65%)]" />
       <div data-blob="" aria-hidden className="pointer-events-none absolute -bottom-[30%] -left-[10%] size-[560px] rounded-full bg-[radial-gradient(circle,rgba(157,205,90,.2),rgba(157,205,90,0)_65%)]" />
       <div ref={fern} aria-hidden className="pointer-events-none absolute -right-[30px] top-[30px] w-[150px] opacity-[.55]">
-        <img data-sway="" src="/assets/fern.svg" alt="" loading="lazy" decoding="async" className="w-full -rotate-[150deg]" />
+        <img data-sway="" src="/assets/fern.svg" alt="" width="220" height="380" loading="lazy" decoding="async" className="h-auto w-full -rotate-[150deg]" />
       </div>
 
       <Container>

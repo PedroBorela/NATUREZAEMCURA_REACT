@@ -16,11 +16,11 @@ export default function Numeros() {
       <div data-blob="" aria-hidden className="pointer-events-none absolute bottom-[-40%] right-0 size-[620px] rounded-full bg-[radial-gradient(circle,rgba(156,204,101,.35),rgba(156,204,101,0)_65%)]" />
       <img
         data-spin="90"
-        src="/imgs/mandala-900.webp"
+        src="/imgs/mandala-700.webp"
         alt=""
         loading="lazy"
         decoding="async"
-        className="pointer-events-none absolute -right-[180px] top-1/2 -mt-[300px] size-[600px] opacity-[.06] invert"
+        className="pointer-events-none absolute -right-[180px] top-1/2 -mt-[300px] size-[600px] object-contain opacity-[.06] invert"
       />
 
       <Container data-stagger="" className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,220px),1fr))] gap-4">

@@ -10,10 +10,12 @@ const WORDS = [
 
 /*
  * Tela de abertura: logo com elastic, palavras sobem, barra enche e a cortina
- * sobe (clip-path). `onReveal` dispara um pouco antes do fim para a timeline
- * do hero começar sobreposta; `onDone` remove o loader.
+ * sobe (clip-path). `onCover` avisa que a tela ainda está 100% coberta (o hero
+ * pode assumir o estado inicial da animação sem piscar), `onReveal` dispara um
+ * pouco antes do fim para a timeline do hero começar sobreposta e `onDone`
+ * remove o loader.
  */
-export default function Loader({ onReveal, onDone }) {
+export default function Loader({ onCover, onReveal, onDone }) {
   const ref = useRef(null)
 
   useGSAP(
@@ -23,6 +25,7 @@ export default function Loader({ onReveal, onDone }) {
         .from("[data-loader-logo]", { scale: 0.3, opacity: 0, rotate: -25, duration: 1.1, ease: "elastic.out(1,.5)" })
         .from("[data-loader-word]", { yPercent: 115, duration: 0.7, stagger: 0.08, ease: "power4.out" }, "-=.7")
         .to("[data-loader-bar]", { scaleX: 1, duration: 0.8, ease: "power2.inOut" }, "-=.3")
+        .add(() => onCover?.())
         .to(ref.current, { clipPath: "inset(0 0 100% 0)", duration: 1, ease: "expo.inOut" })
         .add(() => onReveal?.(), "-=.55")
         .add(() => onDone?.())

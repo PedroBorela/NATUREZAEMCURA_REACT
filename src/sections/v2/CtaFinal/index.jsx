@@ -24,7 +24,7 @@ export default function CtaFinal() {
         <div data-blob="" aria-hidden className="pointer-events-none absolute -right-[10%] -top-[40%] size-[640px] rounded-full bg-[radial-gradient(circle,rgba(255,255,255,.9),rgba(255,255,255,0)_65%)]" />
         <img
           data-spin="100"
-          src="/imgs/mandala-900.webp"
+          src="/imgs/mandala-700.webp"
           alt=""
           loading="lazy"
           decoding="async"

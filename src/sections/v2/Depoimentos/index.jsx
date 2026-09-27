@@ -30,13 +30,13 @@ function TestimonialCard({ item, hidden }) {
       </div>
       <blockquote className="m-0 text-[15px] leading-[1.6] text-ink">{item.quote}</blockquote>
       <figcaption className="mt-auto flex items-center gap-3">
+        {/* Avatar decorativo: iniciais via CSS, o nome vem logo ao lado */}
         <span
           aria-hidden
+          data-initials={initials(item.name)}
           style={{ background: item.color }}
-          className="flex size-[42px] items-center justify-center rounded-full font-serif text-[17px] text-white"
-        >
-          {initials(item.name)}
-        </span>
+          className="flex size-[42px] items-center justify-center rounded-full font-serif text-[17px] text-white before:content-[attr(data-initials)]"
+        />
         <span className="flex flex-col gap-0.5">
           <strong className="text-[14.5px] text-ink">{item.name}</strong>
           <span className="text-[12.5px] text-muted">{item.title}</span>

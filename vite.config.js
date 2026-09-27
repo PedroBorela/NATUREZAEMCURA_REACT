@@ -10,17 +10,8 @@ export default defineConfig({
     },
   },
   build: {
-    rollupOptions: {
-      output: {
-        manualChunks: {
-          'vendor-react': ['react', 'react-dom'],
-          'vendor-motion': ['framer-motion', 'motion'],
-          'vendor-gsap': ['gsap', '@gsap/react', 'lenis'],
-          'vendor-icons': ['react-icons'],
-          'vendor-dates': ['date-fns'],
-        },
-      },
-    },
+    // Sem manualChunks: dividir à mão fazia a v2 baixar o framer-motion da v1.
+    // O Rollup separa sozinho o que só a landing antiga (lazy) usa.
     chunkSizeWarningLimit: 600,
   },
 })

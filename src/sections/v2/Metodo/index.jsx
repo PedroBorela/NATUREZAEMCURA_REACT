@@ -113,9 +113,12 @@ export default function Metodo() {
                     <span className={cn("flex size-14 items-center justify-center rounded-[18px]", t.icon)}>
                       <Icon size={28} aria-hidden />
                     </span>
-                    <span aria-hidden className={cn("font-serif text-[clamp(60px,7vw,96px)] leading-[.8]", t.number)}>
-                      {card.n}
-                    </span>
+                    {/* Número decorativo via CSS (fora da árvore de acessibilidade) */}
+                    <span
+                      aria-hidden
+                      data-n={card.n}
+                      className={cn("font-serif text-[clamp(60px,7vw,96px)] leading-[.8] before:content-[attr(data-n)]", t.number)}
+                    />
                   </div>
                   <h3 className={cn("m-0 font-serif text-[clamp(26px,2.6vw,36px)] font-normal", t.title)}>{card.title}</h3>
                   <p className={cn("m-0 text-[15.5px] leading-[1.6]", t.text)}>{card.text}</p>

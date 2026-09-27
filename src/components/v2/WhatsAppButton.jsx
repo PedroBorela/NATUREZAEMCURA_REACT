@@ -6,7 +6,7 @@ import { WhatsAppIcon } from "./icons"
 // Botão flutuante do WhatsApp com anel pulsante
 export default function WhatsAppButton() {
   const ref = useRef(null)
-  useAmbient(ref)
+  useAmbient(ref, { pauseOffscreen: false })
 
   return (
     <div ref={ref}>

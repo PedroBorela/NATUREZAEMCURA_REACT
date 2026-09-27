@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { memo, useEffect, useRef, useState } from "react"
 import { ScrollTrigger } from "@/lib/gsap"
 import { useFinePointer, useIsWide } from "@/hooks/useIsWide"
 import { useLenis } from "@/hooks/useLenis"
@@ -26,70 +26,103 @@ import Duvidas from "@/sections/v2/Duvidas"
 import CtaFinal from "@/sections/v2/CtaFinal"
 import Footer from "@/sections/v2/Footer"
 
-// Recalcula os ScrollTriggers quando algo muda a altura da página
+// Recalcula os ScrollTriggers quando fontes/imagens terminam de carregar.
+// Um único refresh com debounce: cada refresh relayouta a página inteira.
 function useScrollTriggerRefresh(wide) {
   useEffect(() => {
     let timer
     const refresh = () => {
       clearTimeout(timer)
-      timer = setTimeout(() => ScrollTrigger.refresh(), 150)
+      timer = setTimeout(() => ScrollTrigger.refresh(), 200)
     }
-    // Eventos "load" de <img> não borbulham; captura no document pega os lazy
-    const onAssetLoad = (e) => e.target.tagName === "IMG" && refresh()
-    window.addEventListener("load", refresh)
-    document.addEventListener("load", onAssetLoad, true)
+    if (document.readyState === "complete") refresh()
+    else window.addEventListener("load", refresh, { once: true })
     document.fonts?.ready.then(refresh)
-    const fallback = setTimeout(refresh, 1500)
     return () => {
       clearTimeout(timer)
-      clearTimeout(fallback)
       window.removeEventListener("load", refresh)
-      document.removeEventListener("load", onAssetLoad, true)
     }
   }, [])
 
+  // Troca de layout desktop/mobile (pula a primeira execução)
+  const first = useRef(true)
   useEffect(() => {
+    if (first.current) {
+      first.current = false
+      return
+    }
     const id = setTimeout(() => ScrollTrigger.refresh(), 80)
     return () => clearTimeout(id)
   }, [wide])
 }
+
+// Seções abaixo do hero, na ordem da referência. memo: não re-renderizam
+// quando a abertura ou a montagem progressiva mudam de estado
+const SECTIONS = [
+  Faixa,
+  Sintomas,
+  Numeros,
+  Publico,
+  Metodo,
+  Servicos,
+  ComoFunciona,
+  Coragem,
+  Diferencial,
+  Depoimentos,
+  Agenda,
+  Sobre,
+  Jornada,
+  Duvidas,
+  CtaFinal,
+].map((Section) => memo(Section))
+const FIRST_BATCH = 2
+
+/*
+ * Monta as seções uma por task (em vez de um commit gigante) para não travar
+ * a main thread no carregamento. Tudo acontece enquanto o loader cobre a
+ * tela; no fim, um refresh reposiciona os ScrollTriggers de "fim da página".
+ */
+const Sections = memo(function Sections() {
+  const [count, setCount] = useState(FIRST_BATCH)
+
+  useEffect(() => {
+    if (count >= SECTIONS.length) {
+      ScrollTrigger.refresh()
+      return
+    }
+    const id = setTimeout(() => setCount((c) => c + 1), 0)
+    return () => clearTimeout(id)
+  }, [count])
+
+  return SECTIONS.slice(0, count).map((Section, i) => <Section key={i} />)
+})
+const StaticFooter = memo(Footer)
+const StaticHero = memo(Hero)
+const StaticNavbar = memo(Navbar)
 
 export default function LandingV2() {
   const reduce = useReducedMotion()
   const wide = useIsWide()
   const fine = useFinePointer()
   const [loading, setLoading] = useState(() => !reduce)
-  const [introReady, setIntroReady] = useState(() => reduce)
+  // Fases da abertura: idle (hero visível sob o loader) → cover → reveal
+  const [intro, setIntro] = useState(() => (reduce ? "reveal" : "idle"))
 
   useLenis(!reduce)
   useScrollTriggerRefresh(wide)
 
   return (
     <>
-      {loading && <Loader onReveal={() => setIntroReady(true)} onDone={() => setLoading(false)} />}
+      {loading && <Loader onCover={() => setIntro("cover")} onReveal={() => setIntro("reveal")} onDone={() => setLoading(false)} />}
       {wide && fine && !reduce && <CustomCursor />}
-      <Navbar />
+      <StaticNavbar />
       <WhatsAppButton />
       <BackToTop />
       <main>
-        <Hero introReady={introReady} />
-        <Faixa />
-        <Sintomas />
-        <Numeros />
-        <Publico />
-        <Metodo />
-        <Servicos />
-        <ComoFunciona />
-        <Coragem />
-        <Diferencial />
-        <Depoimentos />
-        <Agenda />
-        <Sobre />
-        <Jornada />
-        <Duvidas />
-        <CtaFinal />
+        <StaticHero intro={intro} />
+        <Sections />
       </main>
-      <Footer />
+      <StaticFooter />
     </>
   )
 }

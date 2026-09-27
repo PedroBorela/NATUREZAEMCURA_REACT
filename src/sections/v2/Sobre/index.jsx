@@ -27,7 +27,7 @@ export default function Sobre() {
     >
       <img
         data-spin="140"
-        src="/imgs/mandala-900.webp"
+        src="/imgs/mandala-700.webp"
         alt=""
         loading="lazy"
         decoding="async"

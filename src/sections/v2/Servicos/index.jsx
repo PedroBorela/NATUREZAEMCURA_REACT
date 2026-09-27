@@ -100,7 +100,7 @@ export default function Servicos() {
               rel="noopener noreferrer"
               className="relative grid grid-cols-[32px_minmax(0,1fr)_44px] items-center gap-x-4 gap-y-2 border-b sm:grid-cols-[minmax(0,56px)_minmax(0,1.3fr)_minmax(0,1fr)_56px] sm:gap-5 border-lavanda-200 px-3 py-7 text-ink transition-[background-color,padding] ease-spring [transition-duration:400ms,500ms] hover:bg-lavanda-50 hover:pl-7 hover:text-ink"
             >
-              <span className="text-[13px] font-bold tracking-[.1em] text-lavanda-500">{String(i + 1).padStart(2, "0")}</span>
+              <span className="text-[13px] font-bold tracking-[.1em] text-lavanda-600">{String(i + 1).padStart(2, "0")}</span>
               <span className="flex flex-wrap items-center gap-2.5">
                 <span className="font-serif text-[clamp(22px,2.4vw,32px)] leading-[1.1]">{s.title}</span>
                 {s.tag && <span className="rounded-full bg-lavanda-100 px-2.5 py-1 text-[11px] font-bold tracking-[.06em] text-lavanda-600">{s.tag}</span>}

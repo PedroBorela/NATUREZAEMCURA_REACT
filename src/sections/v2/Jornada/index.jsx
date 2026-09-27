@@ -54,7 +54,8 @@ export default function Jornada() {
             scale: 1,
             opacity: 1,
             ease: "none",
-            scrollTrigger: { trigger: chapter, containerAnimation: hTween, start: "left right", end: "center center", scrub: true },
+            // fim em px (e não "center center") para o último capítulo também completar
+            scrollTrigger: { trigger: chapter, containerAnimation: hTween, start: "left right", end: "left right-=700", scrub: true },
           },
         ),
       )
@@ -98,9 +99,7 @@ export default function Jornada() {
               )}
             >
               <div className="flex flex-col gap-3.5">
-                <span aria-hidden className="font-serif text-[64px] leading-[.8] text-verde-200">
-                  {ch.n}
-                </span>
+                <span aria-hidden data-n={ch.n} className="font-serif text-[64px] leading-[.8] text-verde-200 before:content-[attr(data-n)]" />
                 <h3 className="m-0 font-serif text-[clamp(26px,2.6vw,34px)] font-normal leading-[1.1] text-verde-900">{ch.title}</h3>
                 <p className="m-0 text-[15px] leading-[1.7] text-texto">{ch.text}</p>
                 {ch.bullets.length > 0 && (

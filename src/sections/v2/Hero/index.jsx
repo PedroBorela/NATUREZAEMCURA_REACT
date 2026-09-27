@@ -1,4 +1,4 @@
-import { useRef } from "react"
+import { useEffect, useRef } from "react"
 import { ArrowDownRight, Leaf, Sprout } from "lucide-react"
 import { gsap, useGSAP } from "@/lib/gsap"
 import { useAmbient } from "@/hooks/useAmbient"
@@ -16,18 +16,24 @@ const SEAL_PATH_ID = "hero-seal-path"
 const glass = "border border-white/90 bg-white/70 shadow-float backdrop-blur-[14px]"
 
 /*
- * `introReady` libera a timeline de entrada (o Loader avisa quando a cortina
- * está subindo). Até lá os elementos ficam no estado inicial, escondidos.
+ * `intro` vem do Loader:
+ *   idle    conteúdo renderizado normalmente sob o loader (pinta cedo → LCP bom)
+ *   cover   tela ainda coberta: aplica o estado inicial da animação, pausada
+ *   reveal  cortina subindo: toca a timeline de entrada
  */
-export default function Hero({ introReady }) {
+export default function Hero({ intro = "reveal" }) {
   const ref = useRef(null)
   const reduce = useReducedMotion()
   const fine = useFinePointer()
-  useAmbient(ref)
+  useAmbient(ref, { enabled: intro === "reveal" })
 
+  const tlRef = useRef(null)
+  const started = intro !== "idle"
+
+  // Timeline montada uma vez (na fase "cover") e só tocada no "reveal"
   useGSAP(
     () => {
-      if (reduce) return
+      if (reduce || !started) return
       const tl = gsap.timeline({ paused: true })
       tl.from("[data-hero-line]", { yPercent: 118, rotate: 2.5, duration: 1.2, stagger: 0.085, ease: "expo.out" })
         .from("[data-hero-photo]", { y: 90, scale: 0.9, opacity: 0, duration: 1.5, ease: "expo.out" }, "<")
@@ -39,17 +45,21 @@ export default function Hero({ introReady }) {
       const len = path.getTotalLength()
       gsap.set(path, { strokeDasharray: len, strokeDashoffset: len })
       tl.to(path, { strokeDashoffset: 0, duration: 1.1, ease: "power2.inOut" }, "-=1.2")
-
-      if (introReady) tl.play()
+      tlRef.current = tl
 
       gsap.to("[data-hero-photo-wrap]", {
         yPercent: 8,
         ease: "none",
         scrollTrigger: { trigger: ref.current, start: "top top", end: "bottom top", scrub: true },
       })
+      return () => (tlRef.current = null)
     },
-    { scope: ref, dependencies: [reduce, introReady], revertOnUpdate: true },
+    { scope: ref, dependencies: [reduce, started], revertOnUpdate: true },
   )
+
+  useEffect(() => {
+    if (intro === "reveal") tlRef.current?.play()
+  }, [intro])
 
   // Camadas com profundidade seguem o mouse
   useGSAP(
@@ -176,7 +186,7 @@ export default function Hero({ introReady }) {
 
         <div className="relative mx-auto w-full max-w-[540px] self-start">
           <div data-depth="0.3" aria-hidden className="pointer-events-none absolute inset-[-6%_-8%_-4%_-8%]">
-            <img data-spin="60" src="/imgs/mandala-900.webp" alt="" className="size-full object-contain opacity-[.13]" />
+            <img data-spin="60" src="/imgs/mandala-700.webp" alt="" className="size-full object-contain opacity-[.13]" />
           </div>
 
           <div data-hero-photo-wrap="">
