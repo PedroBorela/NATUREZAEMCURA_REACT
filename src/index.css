@@ -17,6 +17,11 @@
         overflow: clip;
     }
 
+    html {
+        /* a referência usa o line-height padrão do navegador, não o 1.5 do preflight */
+        line-height: normal;
+    }
+
     body {
         margin: 0;
         background: theme('colors.lavanda.bg');
