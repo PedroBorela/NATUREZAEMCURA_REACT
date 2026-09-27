@@ -2,7 +2,7 @@
 
 import { cn } from "@/lib/utils";
 import { AnimatePresence, motion } from "framer-motion";
-import { useEffect, useState, useCallback, memo } from "react";
+import { useState, useCallback, memo } from "react";
 
 // Componentes memoizados para evitar rerenders desnecessários
 const Card = memo(({ className, children }) => {

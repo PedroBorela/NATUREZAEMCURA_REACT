@@ -1,71 +1,20 @@
-import { lazy, Suspense, useEffect, useState } from "react"
-import CTA from "./sections/Cta"
-import Navbar from "./sections/Navbar"
-import BordaOndulada from "./components/BordaOndulada"
-import LoadingScreen from "./components/LoadingScreen"
-import { meusEventos } from "./constants/events"
+import { lazy, Suspense } from "react"
+import LandingV2 from "./pages/LandingV2"
 
-const Hero = lazy(() => import("./sections/Hero"))
-const CardHoverEffectDemo = lazy(() => import("./sections/Cards").then(m => ({ default: m.CardHoverEffectDemo })))
-const Numeros = lazy(() => import("./sections/Numeros"))
-const CarouselDemo = lazy(() => import("./components/CarouselDemo").then(m => ({ default: m.CarouselDemo })))
-const TimelineDemo = lazy(() => import("./components/TimelineDemo").then(m => ({ default: m.TimelineDemo })))
-const Footer = lazy(() => import("./sections/footer"))
-const VoltarPraCima = lazy(() => import("./components/voltarPraCima"))
-const InfiniteMovingCardsDemo = lazy(() => import("./components/Testimonial").then(m => ({ default: m.InfiniteMovingCardsDemo })))
-const Calendario = lazy(() => import("./sections/Calendario"))
+// A landing antiga continua acessível em ?v=1 até a v2 ser aprovada
+const LandingV1 = lazy(() => import("./pages/LandingV1"))
 
-const SectionFallback = () => <div className="w-full h-48 bg-transparent" />
+const isLegacy = () => new URLSearchParams(window.location.search).get("v") === "1"
 
 const App = () => {
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    let minDelayDone = false;
-    let windowLoaded = false;
-
-    const tryHide = () => {
-      if (minDelayDone && windowLoaded) setIsLoading(false);
-    };
-
-    const timer = setTimeout(() => {
-      minDelayDone = true;
-      tryHide();
-    }, 800);
-
-    if (document.readyState === "complete") {
-      windowLoaded = true;
-    } else {
-      const onLoad = () => { windowLoaded = true; tryHide(); };
-      window.addEventListener("load", onLoad, { once: true });
-    }
-
-    return () => clearTimeout(timer);
-  }, []);
-
-  if (isLoading) {
-    return <LoadingScreen />;
-  }
-
-  return (
-    <main className="relative min-h-screen w-screen overflow-x-hidden">
-      <Navbar />
-      <CTA />
-      <Suspense fallback={<SectionFallback />}>
-        <Numeros />
-        <CarouselDemo />
-        <BordaOndulada direcao="bottom" />
-        <CardHoverEffectDemo />
-        <BordaOndulada direcao="top" />
-        <InfiniteMovingCardsDemo />
-        <Calendario eventos={meusEventos} />
-        <Hero />
-        <TimelineDemo />
-        <VoltarPraCima />
-        <Footer />
+  if (isLegacy()) {
+    return (
+      <Suspense fallback={null}>
+        <LandingV1 />
       </Suspense>
-    </main>
-  )
+    )
+  }
+  return <LandingV2 />
 }
 
 export default App

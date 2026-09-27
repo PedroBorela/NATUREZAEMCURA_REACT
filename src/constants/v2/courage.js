@@ -1,0 +1,33 @@
+export const COURAGE = {
+  title: "Você não precisa enfrentar tudo sozinho",
+  lead: "Muitas pessoas passam anos tentando suportar dores emocionais em silêncio.",
+  // Frase revelada palavra a palavra no scroll; `tone` define a cor
+  statement: [
+    ["Pedir", "white"],
+    ["ajuda", "white"],
+    ["não", "white"],
+    ["é", "white"],
+    ["fraqueza.", "white"],
+    ["É", "lilas"],
+    ["um", "lilas"],
+    ["passo", "lilas"],
+    ["de", "lilas"],
+    ["coragem.", "lima"],
+  ],
+  text: "No Natureza em Cura, você encontra acolhimento, escuta e ferramentas reais para transformar sua vida emocional.",
+  cta: "Dar o primeiro passo",
+  goalsEyebrow: "Nosso compromisso",
+  goalsTitle: "Nosso objetivo é ajudar você a:",
+  goals: [
+    "Desenvolver equilíbrio emocional",
+    "Aliviar ansiedade e crises de pânico",
+    "Reduzir sintomas depressivos",
+    "Fortalecer sua saúde mental",
+    "Recuperar autoestima e vitalidade",
+    "Melhorar o sono",
+    "Aliviar dores corporais relacionadas ao emocional",
+    "Desenvolver foco e clareza mental",
+    "Criar mais conexão consigo mesmo",
+    "Viver com mais leveza, presença e propósito",
+  ],
+}

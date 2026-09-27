@@ -7,6 +7,9 @@ export default {
   theme: {
     extend: {
       fontFamily: {
+        serif: ['"Young Serif"', 'Georgia', 'serif'],
+        sans: ['"Plus Jakarta Sans"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        hand: ['Caveat', 'cursive'],
         zentry: ['zentry', 'sans-serif'],
         general: ['general', 'sans-serif'],
         'circular-web': ['circular-web', 'sans-serif'],
@@ -15,6 +18,39 @@ export default {
       },
 
       colors: {
+        // Paleta da landing v2
+        lavanda: {
+          bg: '#FBFAFF',
+          50: '#F4F0FD',
+          75: '#F1ECFD',
+          100: '#EEE8FC',
+          150: '#ECE6FB',
+          200: '#E2D9FA',
+          300: '#D9CEF7',
+          350: '#C9B8FF',
+          400: '#B9A2F3',
+          500: '#8C6CE6',
+          600: '#6B46C1',
+        },
+        ink: '#2A1B5E',
+        texto: '#4B4568',
+        muted: '#6A6488',
+        noite: '#1E1542',
+        verde: {
+          50: '#EEF6E6',
+          100: '#E4F2D5',
+          200: '#CFE3BC',
+          300: '#B5DC8A',
+          350: '#9DCD5A',
+          400: '#9CCC65',
+          500: '#7CB342',
+          700: '#2E7D32',
+          900: '#1B5E20',
+          mata: '#17401D',
+          rodape: '#14301A',
+          salvia: '#D5E6CC',
+          musgo: '#B9CDAE',
+        },
         blue: {
           50: '#DFDFF0',
           75: '#DFDFF2',
@@ -59,6 +95,18 @@ export default {
         },
       },
 
+      boxShadow: {
+        glass: 'inset 0 1px 0 rgba(255,255,255,.9), 0 18px 40px -28px rgba(76,52,160,.45)',
+        float: '0 20px 40px -18px rgba(42,27,94,.4)',
+        photo: '0 40px 80px -40px rgba(42,27,94,.5)',
+        card: '0 24px 50px -34px rgba(76,52,160,.55)',
+        cta: '0 16px 34px -14px rgba(27,94,32,.7)',
+      },
+      transitionTimingFunction: {
+        spring: 'cubic-bezier(.34,1.56,.64,1)',
+        bounce: 'cubic-bezier(.34,1.8,.5,1)',
+        expo: 'cubic-bezier(.16,1,.3,1)',
+      },
       animation: {
         'star-movement-bottom': 'star-movement-bottom 6s linear infinite alternate',
         'star-movement-top': 'star-movement-top 6s linear infinite alternate',
