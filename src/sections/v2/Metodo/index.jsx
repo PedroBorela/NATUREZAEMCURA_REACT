@@ -2,6 +2,7 @@ import { useRef } from "react"
 import { Check } from "lucide-react"
 import { gsap, useGSAP } from "@/lib/gsap"
 import { cn } from "@/lib/utils"
+import { useIsWide } from "@/hooks/useIsWide"
 import { useReducedMotion } from "@/hooks/useReducedMotion"
 import { useReveal } from "@/hooks/useReveal"
 import { Container, Eyebrow, Heading } from "@/components/v2/Typography"
@@ -50,18 +51,20 @@ const THEMES = {
   },
 }
 
-// Cada card gruda um pouco mais abaixo do anterior
-const STICKY_TOP = ["top-[110px]", "top-[130px]", "top-[150px]", "top-[170px]"]
+// Cada card gruda um pouco mais abaixo do anterior (só no desktop: no
+// celular os cards são mais altos que a tela e o empilhamento escondia texto)
+const STICKY_TOP = ["lg:top-[110px]", "lg:top-[130px]", "lg:top-[150px]", "lg:top-[170px]"]
 
 export default function Metodo() {
   const ref = useRef(null)
   const reduce = useReducedMotion()
+  const wide = useIsWide()
   useReveal(ref)
 
   // Cards empilhados: o de baixo encolhe e esmaece quando o próximo sobe
   useGSAP(
     () => {
-      if (reduce) return
+      if (reduce || !wide) return
       const cards = gsap.utils.toArray("[data-stack-card]", ref.current)
       cards.slice(0, -1).forEach((card, i) =>
         gsap.to(card, {
@@ -72,7 +75,7 @@ export default function Metodo() {
         }),
       )
     },
-    { scope: ref, dependencies: [reduce], revertOnUpdate: true },
+    { scope: ref, dependencies: [reduce, wide], revertOnUpdate: true },
   )
 
   return (
@@ -103,7 +106,7 @@ export default function Metodo() {
                 key={card.n}
                 data-stack-card=""
                 className={cn(
-                  "sticky grid origin-top grid-cols-[repeat(auto-fit,minmax(min(100%,420px),1fr))] overflow-hidden rounded-[36px] border shadow-[0_40px_80px_-50px_rgba(42,27,94,.5)]",
+                  "grid origin-top grid-cols-1 overflow-hidden rounded-[28px] border shadow-[0_40px_80px_-50px_rgba(42,27,94,.5)] lg:sticky lg:grid-cols-2 lg:rounded-[36px]",
                   STICKY_TOP[i],
                   t.card,
                 )}
@@ -139,7 +142,8 @@ export default function Metodo() {
                   )}
                   <p className={cn("m-0 mt-auto pt-3.5 text-[13.5px] italic", t.foot)}>{card.footnote}</p>
                 </div>
-                <div className="relative min-h-[320px]">
+                {/* No celular a foto vai para o topo do card, com altura contida */}
+                <div className="relative order-first h-[220px] sm:h-[300px] lg:order-none lg:h-auto lg:min-h-[320px]">
                   <img
                     src={card.img.src}
                     alt={card.img.alt}
