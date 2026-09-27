@@ -17,7 +17,8 @@ export default function Duvidas() {
   return (
     <section ref={ref} id="duvidas" aria-labelledby="duvidas-title" className="relative bg-lavanda-bg py-[clamp(90px,10vw,140px)]">
       <Container className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,380px),1fr))] items-start gap-[clamp(36px,5vw,70px)]">
-        <div className="sticky top-[120px] flex flex-col gap-[18px]">
+        {/* Sticky só com duas colunas; empilhado, as perguntas passavam por cima */}
+        <div className="flex flex-col gap-[18px] lg:sticky lg:top-[120px]">
           <Eyebrow data-reveal="" className="self-start">
             {COPY.eyebrow}
           </Eyebrow>
